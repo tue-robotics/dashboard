@@ -1,16 +1,28 @@
 <!DOCTYPE html>
-<html ng-app="app">
+<html>
 
 <head>
-    <title>App Title</title>
-    <script src="http://localhost:35729/livereload.js"></script>
-    <script src="bower_components/angular/angular.min.js"></script>
-    <script src="scripts/app.js"></script>
+  <title>App Title</title>
+  <script src="http://localhost:35729/livereload.js"></script>
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/bootstrap/dist/bootstrap.min.js"></script>
+
+  <script src="scripts/app.js"></script>
+
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="styles/app.css" />
+
 </head>
 
-<body ng-controller="MainCtrl">
+<body>
 
-<h1>{{ greeting }}</h1>
+<div class="container-fluid fill">
+  <div class="row fill">
+    <button class="btn btn-primary col-xs-4">A</button>
+    <button class="btn btn-default col-xs-4">B</button>
+    <button class="btn btn-success col-xs-4">C</button>
+  </div>
+</div>
 
 </body>
 
