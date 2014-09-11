@@ -19,7 +19,7 @@
 
   document.getElementById('status-all').addEventListener('click', function (e) {
       menu.popup(remote.getCurrentWindow());
-  })
+  });
 
   window.addEventListener('contextmenu', function (e) {
     e.preventDefault();
