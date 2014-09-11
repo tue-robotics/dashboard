@@ -4,7 +4,6 @@
 <head>
   <title>TU/e Hardware Dashboard</title>
   <script src="http://localhost:35729/livereload.js"></script>
-  <script src="scripts/app.js"></script>
 
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="styles/app.css" />
@@ -13,13 +12,26 @@
 
 <body>
 
-<div class="container-fluid fill">
-  <div class="row fill">
-    <button class="btn btn-primary col-xs-4">A</button>
-    <button class="btn btn-default col-xs-4">B</button>
-    <button class="btn btn-success col-xs-4">C</button>
-  </div>
-</div>
+  <button id="status-all"       class="btn btn-lg btn-primary">
+    <span class="glyphicon glyphicon-plane"></span>
+  </button>
+  <button id="status-arm-left"  class="btn btn-lg btn-success">
+    <span class="glyphicon glyphicon-hand-left"></span>
+  </button>
+  <button id="status-arm-right" class="btn btn-lg btn-info">
+    <span class="glyphicon glyphicon-hand-right"></span>
+  </button>
+  <button id="status-base"      class="btn btn-lg btn-info">
+    <span class="glyphicon glyphicon-move"></span>
+  </button>
+  <button id="status-spindle"   class="btn btn-lg btn-warning">
+    <span class="glyphicon glyphicon-sort"></span>
+  </button>
+  <button id="status-head"      class="btn btn-lg btn-danger">
+    <span class="glyphicon glyphicon-user"></span>
+  </button>
+
+  <script src="scripts/app.js"></script>
 
 </body>
 

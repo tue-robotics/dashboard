@@ -2,10 +2,13 @@ html, body {
   height: 100%;
 }
 
-.fill {
-  height: 100%;
+body {
+  padding: 4px;
 }
 
 .btn {
-  min-height: 100%;
+  font-size: 24px;
+  height: 64px;
+  width: 64px;
 }
+

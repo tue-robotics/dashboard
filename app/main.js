@@ -23,7 +23,7 @@ app.on('ready', function () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     'use-content-size': true,
-    width: 600, height: 120,
+    width: 428, height: 72,
   });
 
   // and load the index.html of the app.
@@ -138,6 +138,6 @@ var template = [
   },
 ];
 
-//var Menu = require('menu');
-//var menu = Menu.buildFromTemplate(template);
-//Menu.setApplicationMenu(menu);
+var Menu = require('menu');
+var menu = Menu.buildFromTemplate(template);
+Menu.setApplicationMenu(menu);
