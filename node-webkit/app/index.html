@@ -16,24 +16,29 @@
 
   <h1>{{ greeting }}</h1>
 
-  <button id="status-all"       class="btn btn-lg btn-primary">
+  <button id="status-all"       ng-class="status" class="btn btn-lg">
     <span class="glyphicon glyphicon-plane"></span>
   </button>
-  <button id="status-arm-left"  class="btn btn-lg btn-success">
+  <button id="status-arm-left"  ng-class="status" class="btn btn-lg">
     <span class="glyphicon glyphicon-hand-left"></span>
   </button>
-  <button id="status-arm-right" class="btn btn-lg btn-info">
+  <button id="status-arm-right" ng-class="status" class="btn btn-lg">
     <span class="glyphicon glyphicon-hand-right"></span>
   </button>
-  <button id="status-base"      class="btn btn-lg btn-info">
+  <button id="status-base"      ng-class="status" class="btn btn-lg">
     <span class="glyphicon glyphicon-move"></span>
   </button>
-  <button id="status-spindle"   class="btn btn-lg btn-warning">
+  <button id="status-spindle"   ng-class="status" class="btn btn-lg">
     <span class="glyphicon glyphicon-sort"></span>
   </button>
-  <button id="status-head"      class="btn btn-lg btn-danger">
+  <button id="status-head"      ng-class="status" class="btn btn-lg">
     <span class="glyphicon glyphicon-user"></span>
   </button>
+
+  <br />
+
+  <input id="setbtn" type="button" value="set" ng-click="status='btn-danger'">
+  <input id="setbtn" type="button" value="set" ng-click="status='btn-success'">
 
 </body>
 
