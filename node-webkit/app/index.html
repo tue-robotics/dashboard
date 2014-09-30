@@ -2,7 +2,11 @@
 <html ng-app="app">
 
 <head>
-    <title>App Title</title>
+    <title>Dashboard</title>
+
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="styles/main.css" />
+
     <script src="script.js"></script>
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="scripts/app.js"></script>
@@ -10,7 +14,26 @@
 
 <body ng-controller="MainCtrl">
 
-<h1>{{ greeting }}</h1>
+  <h1>{{ greeting }}</h1>
+
+  <button id="status-all"       class="btn btn-lg btn-primary">
+    <span class="glyphicon glyphicon-plane"></span>
+  </button>
+  <button id="status-arm-left"  class="btn btn-lg btn-success">
+    <span class="glyphicon glyphicon-hand-left"></span>
+  </button>
+  <button id="status-arm-right" class="btn btn-lg btn-info">
+    <span class="glyphicon glyphicon-hand-right"></span>
+  </button>
+  <button id="status-base"      class="btn btn-lg btn-info">
+    <span class="glyphicon glyphicon-move"></span>
+  </button>
+  <button id="status-spindle"   class="btn btn-lg btn-warning">
+    <span class="glyphicon glyphicon-sort"></span>
+  </button>
+  <button id="status-head"      class="btn btn-lg btn-danger">
+    <span class="glyphicon glyphicon-user"></span>
+  </button>
 
 </body>
 
