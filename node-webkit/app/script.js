@@ -1,6 +1,7 @@
 var gui = require('nw.gui');
 gui.Window.get().show();
 
+/*
 var menu1 = new gui.Menu();
 var submenu = new gui.Menu();
 submenu.append(new gui.MenuItem({ type: 'checkbox', label: 'box1' }));
@@ -45,20 +46,22 @@ for (var i = 0; i < colors.length; i++) {
   menu3.append(new gui.MenuItem({ label: colors[i], click: changecolor }));
 };
 
-document.getElementById('area-1').addEventListener('contextmenu', function(ev) { 
+document.getElementById('area-1').addEventListener('contextmenu', function(ev) {
   ev.preventDefault();
   menu1.popup(ev.x, ev.y);
   return false;
 });
 
-document.getElementById('area-2').addEventListener('contextmenu', function(ev) { 
+document.getElementById('area-2').addEventListener('contextmenu', function(ev) {
   ev.preventDefault();
   menu2.popup(ev.x, ev.y);
   return false;
 });
 
-document.getElementById('area-3').addEventListener('contextmenu', function(ev) { 
+document.getElementById('area-3').addEventListener('contextmenu', function(ev) {
   ev.preventDefault();
   menu3.popup(ev.x, ev.y);
   return false;
 });
+
+*/
