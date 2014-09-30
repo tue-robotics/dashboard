@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package>
+  <name>dashboard</name>
+  <version>0.0.0</version>
+  <description>The dashboard package</description>
+
+  <maintainer email="rayman747@hotmail.com">Ramon Wijnands</maintainer>
+
+  <license>BSD</license>
+
+  <url type="website">https://github.com/tue-robotics/dashboard</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+</package>
