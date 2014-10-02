@@ -4,9 +4,9 @@
   "window": {
     //"icon": "link.png",
     "show": false,
-    "position": "center",
-    "width": 430,
-    "height": 110,
-    "always-on-top": true
+    //"position": "center",
+    "width": 600,
+    "height": 400,
+    "always-on-top": false
   }
 }
