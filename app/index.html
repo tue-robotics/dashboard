@@ -4,6 +4,8 @@
 <head>
     <title>Dashboard</title>
 
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="styles/main.css" />
 
@@ -13,8 +15,6 @@
 </head>
 
 <body ng-controller="MainCtrl">
-
-  <h1>{{ greeting }}</h1>
 
   <button id="status-all"       ng-class="status" class="btn btn-lg">
     <span class="glyphicon glyphicon-plane"></span>
@@ -34,11 +34,6 @@
   <button id="status-head"      ng-class="status" class="btn btn-lg">
     <span class="glyphicon glyphicon-user"></span>
   </button>
-
-  <br />
-
-  <input type="button" value="set" ng-click="status='btn-danger'">
-  <input type="button" value="set" ng-click="status='btn-success'">
 
 </body>
 

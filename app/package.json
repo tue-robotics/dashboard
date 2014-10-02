@@ -2,9 +2,11 @@
   "name": "node-webkit menu demo",
   "main": "index.html",
   "window": {
+    //"icon": "link.png",
     "show": false,
     "position": "center",
-    "width": 500,
-    "height": 500
+    "width": 430,
+    "height": 110,
+    "always-on-top": true
   }
 }
