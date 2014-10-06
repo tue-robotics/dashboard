@@ -45,13 +45,9 @@ For each part, the following actions will be shown. Keep in mind some actions ca
 | idle      | homed                | stop, reset        | home, start     |
 |           | !homed && mandatory  | stop, reset, start | home            |
 |           | !homed && !mandatory | stop, reset        | home, start     |
-|-----------|----------------------|--------------------|-----------------|
 | homing    |                      | start, reset, home | stop            |
-|-----------|----------------------|--------------------|-----------------|
 | operation |                      | start, reset, home | stop            |
-|-----------|----------------------|--------------------|-----------------|
 | error     |                      | start, stop, home  | reset           |
-|-----------|----------------------|--------------------|-----------------|
 
 ## Which Warnings should be shown when?
 
@@ -80,8 +76,6 @@ Actions:
 | idle        | none homed | stop all, start all | home all          |
 |             | some homed | stop all, home all  | start all         |
 |             | all homed  | stop all, home all  | start all         |
-|-------------|------------|---------------------|-------------------|
 | homeing     |            |                     | home, start, stop |
 | operational |            |                     | home, start, sto  |
 | error       |            |                     | home, start, sto  |
-
