@@ -13,8 +13,7 @@
 1. Home
 2. Start
 3. Stop
-4. Reset  
-5. Error
+4. Reset
 
 ## Amigo's part properties
 
@@ -71,11 +70,11 @@ This button is basically a summary of all the different parts. It also has some 
 
 Actions:
 
-|    State    | Condition  |   Disabled buttons  |  Enabled buttons  |
-|-------------|------------|---------------------|-------------------|
-| idle        | none homed | stop all, start all | home all          |
-|             | some homed | stop all, home all  | start all         |
-|             | all homed  | stop all, home all  | start all         |
-| homeing     |            |                     | home, start, stop |
-| operational |            |                     | home, start, sto  |
-| error       |            |                     | home, start, sto  |
+|    State    | Condition  |   Disabled buttons  |  Enabled buttons              |
+|-------------|------------|---------------------|-------------------------------|
+| idle        | none homed | stop all, start all | home all                      |
+|             | some homed | stop all,           | home all                      |
+|             | all homed  | stop all            | start all, home all           |
+| homeing     |            | home all, start all | stop all                      |
+| operational |            |                     | home all, stop all, start all |
+| error       |            |                     | stop all, start all, home all |
