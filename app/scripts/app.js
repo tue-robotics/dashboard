@@ -11,7 +11,7 @@ app.controller('MainCtrl', function ($scope, ros, Ping) {
   ros.forward(['connection', 'error', 'close'], $scope);
 
   $scope.$on('ros:connection', function (ev, data) {
-    $scope.rosStatus = 'connection';
+    $scope.rosStatus = 'connecting';
   })
 
   $scope.$on('ros:error', function () {
@@ -19,17 +19,19 @@ app.controller('MainCtrl', function ($scope, ros, Ping) {
   });
 
   $scope.$on('ros:close', function () {
-    $scope.rosStatus = 'close';
+    $scope.rosStatus = 'closed';
   });
 
   var ping = new Ping(ros);
   ping.forward($scope);
 
   $scope.$on('ping:ok', function () {
+    //console.log('ping status is ok', this, arguments);
     $scope.rosStatus = 'ok';
   });
 
   $scope.$on('ping:timeout', function () {
+    //console.log('ping timeout', this, arguments);
     $scope.rosStatus = 'timeout';
   });
 });
@@ -57,14 +59,6 @@ app.factory('ros', function ($rootScope, $timeout) {
 
   return {
     ros: ros,
-    on: function (eventName, callback) {
-      ros.addListener(eventName, function () {
-        var args = arguments;
-        $rootScope.$apply(function () {
-          callback.apply(ros, args);
-        });
-      });
-    },
     forward: function (events, scope) {
       if (!Array.isArray(events)) {
         events = [events];
@@ -86,10 +80,10 @@ app.factory('ros', function ($rootScope, $timeout) {
   };
 });
 
-app.factory('Ping', function ($rootScope) {
+app.factory('Ping', function ($rootScope, $timeout) {
 
-  var pingInterval = 5000; // ms. The time between pings
-  var pingTimeout  = 2000; // ms. If ros doesn't respond within this period of time, close the connection
+  var pingInterval = 2000; // ms. The time between pings
+  var pingTimeout  = 500; // ms. If ros doesn't respond within this period of time, close the connection
 
   var defaultScope = $rootScope;
   // when forwarding events, prefix the event name
@@ -122,7 +116,9 @@ app.factory('Ping', function ($rootScope) {
       setTimeout(function() {
         if (start !== -1) { // check if already received a response
           console.log(that.timeoutEventName, pingTimeout);
-          scope.$broadcast(that.timeoutEventName, pingTimeout);
+          $timeout(function () {
+            scope.$broadcast(that.timeoutEventName, pingTimeout);
+          });
         }
       }, pingTimeout);
 
@@ -131,7 +127,9 @@ app.factory('Ping', function ($rootScope) {
         start = -1;
 
         console.log(that.okEventName, diff);
-        scope.$broadcast(that.okEventName, diff);
+        $timeout(function () {
+          scope.$broadcast(that.okEventName, diff);
+        });
       });
     };
 
