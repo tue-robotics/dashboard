@@ -1,8 +1,6 @@
-DASHBOARD:
-==========
+# TU/e Hardware Dashboard
 
-Hardware States:
-----------------
+## Hardware states:
 
 1. Stale
 2. Idle
@@ -10,8 +8,7 @@ Hardware States:
 4. Homing
 5. Error
 
-Dashboard Commands:
-----------------
+## Dashboard commands:
 
 1. Home
 2. Start
@@ -19,76 +16,72 @@ Dashboard Commands:
 4. Reset  
 5. Error
 
-SPECIFY ROBOT SPECIFIC INFORMATION IN CONFIG FILE:
---------------------------------------------------
+## Amigo's part properties
 
-ROBOTNAME = AMIGO
+The table below gives the hardware properties of Amigo's parts. These will be used to determine what actions to show on the hardware dashboard.
 
-PARTPROPERTIES:
-```
-1. Name:              Base      Spindle         Arm             Head
-2. Homeable:          no        yes             yes             no
-3. HomeableMandatory: no        yes             no              no
-4. Resetable:         yes       yes             yes             no
-```
+|   Name  | Homeable | HomeableMandatory | Resetable |
+|---------|----------|-------------------|-----------|
+| Base    | no       | no                | yes       |
+| Spindle | yes      | yes               | yes       |
+| Arm     | yes      | no                | yes       |
+| Head    | no       | no                | no        |
 
-Which Buttons should I show for each part?
-------------------------------------------
+## Actions for each part
 
-```
-1) if Homeable -> Home
-2) Start
-3) Stop
-4) if Resetttable -> Reset
-```
+For each part, the following actions will be shown. Keep in mind some actions can be 'disabled' if certain conditions are met.
 
-Which Buttons should be disabled when?
----------------------------------
-```
-State           If                              Disabled buttons        Enabled Buttons
+| Action |        Condition         |
+|--------|--------------------------|
+| Home   | if the part is homeable  |
+| start  | always                   |
+| stop   | always                   |
+| reset  | if the part is resetable |
 
-Idle            homed                           Stop, Reset             Home, Start
-                !homed && homingmandatory       Start, Stop, Reset      Home
-                !homed && !homingmandatory      Stop, Reset             Home, Start
+## Disabled actions
 
-Homing          -                               Start, Reset, Home      Stop
+|   State   |      Condition       |  Disabled buttons  | Enabled buttons |
+|-----------|----------------------|--------------------|-----------------|
+| idle      | homed                | stop, reset        | home, start     |
+|           | !homed && mandatory  | stop, reset, start | home            |
+|           | !homed && !mandatory | stop, reset        | home, start     |
+|-----------|----------------------|--------------------|-----------------|
+| homing    |                      | start, reset, home | stop            |
+|-----------|----------------------|--------------------|-----------------|
+| operation |                      | start, reset, home | stop            |
+|-----------|----------------------|--------------------|-----------------|
+| error     |                      | start, stop, home  | reset           |
+|-----------|----------------------|--------------------|-----------------|
 
-Operational     -                               Start, Reset, Home      Stop    
+## Which Warnings should be shown when?
 
-Error           -                               Start, Stop, Home       Reset
-```
+| State | Triggered action |         Condition          | Warning |
+|-------|------------------|----------------------------|---------|
+| idle  | start            | !homed && !homingmandatory | *A      |
+| idle  | home             | homed                      | *B      |
 
-Which Warnings should be shown when?
----------------------------------
-```
-State           Action          If                                      Warning
-Idle            Start           !homed && !homingmandatory              A
-Idle            Home            homed                                   B
-```
+A) "This part is not yet homed, Are you sure you want to proceed?" YES/NO
+B) "This part was already homed, Are you sure you want to redo homing?" YES/NO
 
-A "This part is not yet homed, Are you sure you want to proceed?" YES/NO
-B "This part was already homed, Are you sure you want to redo homing?" YES/NO
+## The 'All' button
 
-How about the All button?
----------------------------------
+This button is basically a summary of all the different parts. It also has some associated actions.
 
-All         - Possible Actions
-All         - home all - start all - stop all
+|   Action  | Condition |
+|-----------|-----------|
+| home all  | always    |
+| start all | always    |
+| stop all  | always    |
 
-Disabling Button Rules:
-State           If                              Disabled buttons                Enabled Buttons
+Actions:
 
-Idle            none homed                      stop all, start all             home all                        
-                some homed                      home all, stop all, start all               
-                all homed                       home all, stop all              start all
-
-Homing          -                               home all, start all             stop all
-
-Operational     -                               home all, start all             stop all
-
-Error           -                               home all, start all, stop all   
-
-    
-
-
+|    State    | Condition  |   Disabled buttons  |  Enabled buttons  |
+|-------------|------------|---------------------|-------------------|
+| idle        | none homed | stop all, start all | home all          |
+|             | some homed | stop all, home all  | start all         |
+|             | all homed  | stop all, home all  | start all         |
+|-------------|------------|---------------------|-------------------|
+| homeing     |            |                     | home, start, stop |
+| operational |            |                     | home, start, sto  |
+| error       |            |                     | home, start, sto  |
 
