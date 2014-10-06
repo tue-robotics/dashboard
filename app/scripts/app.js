@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('app', []);
+var app = angular.module('app', ['ui.bootstrap']);
 
 app.controller('MainCtrl', function ($scope, ros, Ping) {
   $scope.title = '<%= appName %>';
@@ -34,6 +34,10 @@ app.controller('MainCtrl', function ($scope, ros, Ping) {
     //console.log('ping timeout', this, arguments);
     $scope.rosStatus = 'timeout';
   });
+
+  // battery
+  $scope.battery = 50;
+  $scope.batteryType = 'success';
 });
 
 app.factory('ros', function ($rootScope, $timeout) {

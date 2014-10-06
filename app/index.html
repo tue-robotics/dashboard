@@ -12,6 +12,7 @@
     <!-- spawn the window -->
     <!-- <script src="script.js"></script> -->
     <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script src="bower_components/eventemitter2/lib/eventemitter2.js"></script>
     <script src="bower_components/roslibjs/build/roslib.min.js"></script>
     <script src="scripts/app.js"></script>
@@ -41,6 +42,7 @@
   <button id="status-head"      ng-class="status" class="btn btn-lg">
     <span class="glyphicon glyphicon-user"></span>
   </button>
+  <progressbar value="battery" type="{{batteryType}}"><b>{{battery}}%</b></progressbar>
 
 </body>
 
