@@ -35,6 +35,12 @@ app.factory('Hardware', function (ros, $rootScope) {
       OPERATIONAL:  2,
       HOMING:       3,
       ERROR:        4,
-    }
+    },
+    commands: {
+      HOMING_CMD: 21,
+      START_CMD:  22,
+      STOP_CMD:   23,
+      RESET_CMD:  24,
+    },
   };
 });
