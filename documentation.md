@@ -2,11 +2,11 @@
 
 ## Hardware states:
 
-1. Stale
-2. Idle
-3. Operational
-4. Homing
-5. Error
+0. Stale
+1. Idle
+2. Operational
+3. Homing
+4. Error
 
 ## Dashboard commands:
 
