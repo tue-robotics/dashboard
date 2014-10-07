@@ -2,7 +2,7 @@
 
 var app = angular.module('app', ['ui.bootstrap']);
 
-app.controller('MainCtrl', function ($scope, ros, Ping) {
+app.controller('MainCtrl', function ($scope, ros, Ping, Hardware) {
   $scope.title = '<%= appName %>';
 
   $scope.status = 'btn-primary';
@@ -26,16 +26,21 @@ app.controller('MainCtrl', function ($scope, ros, Ping) {
   ping.forward($scope);
 
   $scope.$on('ping:ok', function () {
-    //console.log('ping status is ok', this, arguments);
     $scope.rosStatus = 'ok';
   });
 
   $scope.$on('ping:timeout', function () {
-    //console.log('ping timeout', this, arguments);
     $scope.rosStatus = 'timeout';
   });
 
   // battery
   $scope.battery = 50;
   $scope.batteryType = 'success';
+
+  // hardware
+  Hardware.subscribe(function (parts) {
+    parts.forEach(function (part) {
+      console.log(part);
+    });
+  })
 });

@@ -37,7 +37,6 @@ app.factory('Ping', function ($rootScope, $timeout) {
 
       setTimeout(function() {
         if (start !== -1) { // check if already received a response
-          console.log(that.timeoutEventName, pingTimeout);
           $timeout(function () {
             scope.$broadcast(that.timeoutEventName, pingTimeout);
           });
@@ -48,7 +47,6 @@ app.factory('Ping', function ($rootScope, $timeout) {
         var diff = new Date() - start;
         start = -1;
 
-        console.log(that.okEventName, diff);
         $timeout(function () {
           scope.$broadcast(that.okEventName, diff);
         });
