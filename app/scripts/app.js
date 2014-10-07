@@ -50,6 +50,10 @@ app.controller('MainCtrl', function ($scope, ros, Ping, Hardware) {
 
   var levelMap = _.invert(Hardware.levels);
 
+  var throttleLog = _.throttle(function () {
+      console.log.apply(console, arguments);
+    }, 5000);
+
   Hardware.subscribe(function (parts) {
 
     var parts = _.map(parts, function (part) {
@@ -60,6 +64,8 @@ app.controller('MainCtrl', function ($scope, ros, Ping, Hardware) {
     });
 
     parts = _.indexBy(parts, 'name');
+
+    throttleLog(parts);
 
     $scope.hardware = parts;
   })
