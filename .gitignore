@@ -1,3 +1,4 @@
 tmp/
 resources/
+node_modules/
 app/bower_components/
