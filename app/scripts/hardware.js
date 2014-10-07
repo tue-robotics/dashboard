@@ -20,10 +20,6 @@ app.factory('Hardware', function (ros, $rootScope) {
     });
   }
 
-  setTimeout(function () {
-    topic.unsubscribe();
-  }, 500);
-
   return {
     subscribe: function (callback) {
       topic.subscribe(function(message) {

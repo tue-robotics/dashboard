@@ -30,22 +30,22 @@
     {{ rosStatus }}
   </div>
 
-  <button id="status-all"       ng-class="status" class="btn btn-lg">
+  <button id="status-all"       ng-class="hardware.all.class" class="btn btn-lg">
     <span class="glyphicon glyphicon-plane"></span>
   </button>
-  <button id="status-arm-left"  ng-class="status" class="btn btn-lg">
+  <button id="status-arm-left"  ng-class="hardware.left_arm.class" class="btn btn-lg">
     <span class="glyphicon glyphicon-hand-left"></span>
   </button>
-  <button id="status-arm-right" ng-class="status" class="btn btn-lg">
+  <button id="status-arm-right" ng-class="hardware.right_arm.class" class="btn btn-lg">
     <span class="glyphicon glyphicon-hand-right"></span>
   </button>
-  <button id="status-base"      ng-class="status" class="btn btn-lg">
+  <button id="status-base"      ng-class="hardware.base.class" class="btn btn-lg">
     <span class="glyphicon glyphicon-move"></span>
   </button>
-  <button id="status-spindle"   ng-class="status" class="btn btn-lg">
+  <button id="status-spindle"   ng-class="hardware.spindle.class" class="btn btn-lg">
     <span class="glyphicon glyphicon-sort"></span>
   </button>
-  <button id="status-head"      ng-class="status" class="btn btn-lg">
+  <button id="status-head"      ng-class="hardware.head.class" class="btn btn-lg">
     <span class="glyphicon glyphicon-user"></span>
   </button>
   <progressbar value="battery" type="{{batteryType}}"><b>{{battery}}%</b></progressbar>

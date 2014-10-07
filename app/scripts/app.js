@@ -34,13 +34,33 @@ app.controller('MainCtrl', function ($scope, ros, Ping, Hardware) {
   });
 
   // battery
+
   $scope.battery = 50;
   $scope.batteryType = 'success';
 
   // hardware
+
+  var levelColorMap = {
+    STALE:        'default',
+    IDLE:         'info',
+    OPERATIONAL:  'success',
+    HOMING:       'warning',
+    ERROR:        'danger',
+  };
+
+  var levelMap = _.invert(Hardware.levels);
+
   Hardware.subscribe(function (parts) {
-    parts.forEach(function (part) {
-      console.log(part);
+
+    var parts = _.map(parts, function (part) {
+      var level = _.at(levelMap, part.level);
+      var color = levelColorMap[level];
+      part.class = 'btn-' + color;
+      return part;
     });
+
+    parts = _.indexBy(parts, 'name');
+
+    $scope.hardware = parts;
   })
 });
