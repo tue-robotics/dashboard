@@ -1,0 +1,20 @@
+#!/bin/bash
+
+RELEASES=`./get_releases linux64`
+LATEST=`echo $RELEASES | head -n 1`
+TAG=`echo $LATEST | awk '{ print $1 }'`
+URL=`echo $LATEST | awk '{ print $2 }'`
+
+echo -e "found these versions:\n\n$RELEASES\n"
+echo "latest: $TAG"
+
+if [ -e $TAG ]
+then
+  echo "no updates found"
+else
+  rm -rf ../dist/*
+  wget $URL -O- | tar -xzv --directory ../dist
+  touch $TAG
+fi
+
+

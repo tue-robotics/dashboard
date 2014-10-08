@@ -8,7 +8,7 @@ url = 'https://api.github.com/repos/tue-robotics/dashboard/releases'
 rs = json.loads(urllib2.urlopen(url).read())
 
 for r in rs:
-  assets = (asset for asset in r['assets'] if asset['name'] == 'dashboard-%s.zip'% v)
+  assets = (asset for asset in r['assets'] if asset['name'] == 'dashboard-%s.tar.gz' % v)
   new = max(assets, key=lambda a: a['created_at'])
   url = new['browser_download_url']
   print r['tag_name'], url
