@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('app', ['ui.bootstrap']);
+var app = angular.module('app', ['ui.bootstrap', 'angularSpinner']);
 
 app.controller('MainCtrl', function ($scope, ros, Hardware) {
   $scope.title = '<%= appName %>';
@@ -43,6 +43,12 @@ app.controller('MainCtrl', function ($scope, ros, Hardware) {
       console.log.apply(console, arguments);
     }, 5000);
 
+  var rosTimeout = _.debounce(function () {
+    $scope.$apply(function () {
+      $scope.rosStatus = 'connecting';
+    });
+  }, 2000)
+
   Hardware.subscribe(function (parts) {
 
     var parts = _.map(parts, function (part) {
@@ -54,7 +60,11 @@ app.controller('MainCtrl', function ($scope, ros, Hardware) {
 
     parts = _.indexBy(parts, 'name');
 
+
     throttleLog(parts);
+
+    $scope.rosStatus = 'ok';
+    rosTimeout();
 
     $scope.hardware = parts;
   })

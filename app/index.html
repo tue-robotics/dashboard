@@ -14,6 +14,8 @@
 
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="bower_components/spin.js/spin.js"></script>
+    <script src="bower_components/angular-spinner/angular-spinner.min.js"></script>
     <script src="bower_components/eventemitter2/lib/eventemitter2.js"></script>
     <script src="bower_components/roslibjs/build/roslib.min.js"></script>
     <script src="bower_components/lodash/dist/lodash.min.js"></script>
@@ -28,27 +30,29 @@
 
 <body ng-controller="MainCtrl">
 
-  <div ng-if="rosStatus != 'ok'">
-    {{ rosStatus }}
-  </div>
-
   <button id="status-all"       ng-class="hardware.all.class" class="btn btn-lg">
-    <span class="glyphicon glyphicon-plane"></span>
+    <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
+    <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-hand-left"></span>
   </button>
   <button id="status-arm-left"  ng-class="hardware.left_arm.class" class="btn btn-lg">
-    <span class="glyphicon glyphicon-hand-left"></span>
+    <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
+    <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-hand-left"></span>
   </button>
   <button id="status-arm-right" ng-class="hardware.right_arm.class" class="btn btn-lg">
-    <span class="glyphicon glyphicon-hand-right"></span>
+    <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
+    <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-hand-right"></span>
   </button>
   <button id="status-base"      ng-class="hardware.base.class" class="btn btn-lg">
-    <span class="glyphicon glyphicon-move"></span>
+    <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
+    <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-move"></span>
   </button>
   <button id="status-spindle"   ng-class="hardware.spindle.class" class="btn btn-lg">
-    <span class="glyphicon glyphicon-sort"></span>
+    <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
+    <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-sort"></span>
   </button>
   <button id="status-head"      ng-class="hardware.head.class" class="btn btn-lg">
-    <span class="glyphicon glyphicon-user"></span>
+    <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
+    <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-user"></span>
   </button>
   <progressbar value="battery" type="{{batteryType}}"><b>{{battery}}%</b></progressbar>
 
