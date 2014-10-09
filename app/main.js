@@ -2,9 +2,10 @@ var isNodeWebkit = (typeof process == "object");
 
 if (isNodeWebkit)
 {
-  console.log( 'in node-webkit v' + process.versions['node-webkit']);
+  console.log('in node-webkit v' + process.versions['node-webkit']);
 
-  window['_'] = global['_'];
+  // lodash detects 'global' and puts itself into it
+  window['_'] = global._.noConflict();
 
   var gui = require('nw.gui');
   gui.Window.get().show();
