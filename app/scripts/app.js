@@ -2,7 +2,7 @@
 
 var app = angular.module('app', ['ui.bootstrap']);
 
-app.controller('MainCtrl', function ($scope, ros, Ping, Hardware) {
+app.controller('MainCtrl', function ($scope, ros, Hardware) {
   $scope.title = '<%= appName %>';
 
   $scope.status = 'btn-primary';
@@ -20,17 +20,6 @@ app.controller('MainCtrl', function ($scope, ros, Ping, Hardware) {
 
   $scope.$on('ros:close', function () {
     $scope.rosStatus = 'closed';
-  });
-
-  var ping = new Ping(ros);
-  ping.forward($scope);
-
-  $scope.$on('ping:ok', function () {
-    $scope.rosStatus = 'ok';
-  });
-
-  $scope.$on('ping:timeout', function () {
-    $scope.rosStatus = 'timeout';
   });
 
   // battery
