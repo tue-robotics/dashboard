@@ -11,7 +11,6 @@ app.factory('menu', function ($rootScope) {
   var menu = new gui.Menu();
 
   // Add some items
-
   var defaultActions = {
     'home':  {icon: 'icons/cogwheel.png'},
     'start': {icon: 'icons/small31.png'},
@@ -19,18 +18,35 @@ app.factory('menu', function ($rootScope) {
     'reset': {icon: 'icons/update.png'},
   };
 
+  var defaultScope = $rootScope;
+  // when forwarding events, prefix the event name
+  var prefix = 'menu:';
+
+  var callbacks = [];
+
+  var onClick = function (action) {
+    _.forEach(callbacks, function (cb) {
+      cb(action);
+    });
+    callbacks = [];
+  }
+
   _.forEach(defaultActions, function (settings, action) {
     var options = {
       label: action,
+      click: function () {
+        onClick.call(this, action);
+      },
     };
     _.extend(options, settings);
     menu.append(new gui.MenuItem(options));
   });
 
   return {
-    popup: function (x, y) {
+    popup: function (x, y, callback) {
       // Popup as context menu
+      callbacks = [callback];
       menu.popup(100, 100);
-    }
+    },
   };
 });

@@ -72,7 +72,12 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
   // menu
 
   $scope.showMenu = function (e) {
-    menu.popup(e.x, e.y);
+    menu.popup(e.x, e.y, function (event) {
+      console.log(event);
+    });
   };
+  //menu.$on('menu:click', function (event) {
+  //  console.log(event);
+  //});
 
 });
