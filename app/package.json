@@ -4,8 +4,8 @@
   "version": "0.0.3",
   "window": {
     "show": false,
-    "width": 430,
-    "height": 130,
+    "width": 330,
+    "height": 120,
     "always-on-top": true
   }
 }

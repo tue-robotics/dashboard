@@ -30,30 +30,32 @@
 </head>
 
 <body ng-controller="MainCtrl">
-  <button id="status-all"       ng-class="hardware.all.class" class="btn btn-lg" ng-click="showMenu($event)">
-    <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
-    <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-hand-left"></span>
-  </button>
-  <button id="status-arm-left"  ng-class="hardware.left_arm.class" class="btn btn-lg">
-    <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
-    <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-hand-left"></span>
-  </button>
-  <button id="status-arm-right" ng-class="hardware.right_arm.class" class="btn btn-lg">
-    <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
-    <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-hand-right"></span>
-  </button>
-  <button id="status-base"      ng-class="hardware.base.class" class="btn btn-lg">
-    <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
-    <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-move"></span>
-  </button>
-  <button id="status-spindle"   ng-class="hardware.spindle.class" class="btn btn-lg">
-    <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
-    <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-sort"></span>
-  </button>
-  <button id="status-head"      ng-class="hardware.head.class" class="btn btn-lg">
-    <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
-    <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-user"></span>
-  </button>
+  <div class="button-wrapper">
+    <button class="btn" ng-class="hardware.all.class"       ng-click="showMenu($event, 'all')">
+      <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
+      <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-plane"></span>
+    </button>
+    <button class="btn" ng-class="hardware.left_arm.class"  ng-click="showMenu($event, 'all')">
+      <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
+      <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-hand-left"></span>
+    </button>
+    <button class="btn" ng-class="hardware.right_arm.class" ng-click="showMenu($event, 'all')">
+      <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
+      <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-hand-right"></span>
+    </button>
+    <button class="btn" ng-class="hardware.base.class"      ng-click="showMenu($event, 'all')">
+      <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
+      <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-move"></span>
+    </button>
+    <button class="btn" ng-class="hardware.spindle.class"   ng-click="showMenu($event, 'all')">
+      <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
+      <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-sort"></span>
+    </button>
+    <button class="btn" ng-class="hardware.head.class"      ng-click="showMenu($event, 'all')">
+      <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
+      <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-user"></span>
+    </button>
+  </div>
   <progressbar value="battery" type="{{batteryType}}"><b>{{battery}}%</b></progressbar>
 
 </body>
