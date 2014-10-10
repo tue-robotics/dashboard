@@ -3,7 +3,7 @@
 var app = angular.module('app');
 
 app.factory('Hardware', function (ros, $rootScope) {
-  var topic = new ROSLIB.Topic({
+  var inTopic = new ROSLIB.Topic({
     ros: ros.ros,
     name: '/amigo/hardware_status',
     messageType: 'diagnostic_msgs/DiagnosticArray',
@@ -20,14 +20,37 @@ app.factory('Hardware', function (ros, $rootScope) {
     });
   }
 
+  var outTopic = new ROSLIB.Topic({
+    ros: ros.ros,
+    name: '/amigo/dashboard_ctrlcmds',
+    messageType: 'std_msgs/UInt8MultiArray',
+  });
+
+  var commands = {
+    home:  21,
+    start: 22,
+    stop:  23,
+    reset: 24,
+  };
+
   return {
     subscribe: function (callback) {
-      topic.subscribe(function(message) {
+      inTopic.subscribe(function(message) {
         var args = diagnosticMsgToStatus(message);
         $rootScope.$apply(function () {
           callback.call(this, args);
         });
       });
+    },
+    publish: function (i1, command) {
+      var i2 = commands[command];
+      console.log('sending this to the hardware:', i1, i2);
+
+      var cmd = new ROSLIB.Message({
+        data: [i1, i2],
+      });
+
+      outTopic.publish(cmd);
     },
     levels: {
       STALE:        0,
@@ -35,12 +58,6 @@ app.factory('Hardware', function (ros, $rootScope) {
       OPERATIONAL:  2,
       HOMING:       3,
       ERROR:        4,
-    },
-    commands: {
-      HOMING_CMD: 21,
-      START_CMD:  22,
-      STOP_CMD:   23,
-      RESET_CMD:  24,
-    },
+    }
   };
 });

@@ -57,27 +57,21 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
       part.class = 'btn-' + color;
       return part;
     });
-
     parts = _.indexBy(parts, 'name');
-
-
-    throttleLog(parts);
 
     $scope.rosStatus = 'ok';
     rosTimeout();
 
     $scope.hardware = parts;
+
+    throttleLog(parts);
   });
 
   // menu
 
-  $scope.showMenu = function (e) {
-    menu.popup(e.x, e.y, function (event) {
-      console.log(event);
+  $scope.showMenu = function (e, part) {
+    menu.popup(e.x, e.y, function (command) {
+      Hardware.publish(part, command)
     });
   };
-  //menu.$on('menu:click', function (event) {
-  //  console.log(event);
-  //});
-
 });
