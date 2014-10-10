@@ -1,0 +1,10 @@
+#!/bin/bash
+
+for filename in *.svg
+do
+  inkscape --without-gui -f $filename --export-png=temp.png -h 14
+  mogrify temp.png -gravity center -background none -extent 14x14
+  optipng -zc1-9 -zm1-9 -zs0-3 -f0-5 temp.png
+  advpng -z4 temp.png
+  mv temp.png ../../app/icons/${filename%.*}.png
+done

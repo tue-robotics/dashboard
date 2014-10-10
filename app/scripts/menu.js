@@ -13,17 +13,21 @@ app.factory('menu', function ($rootScope) {
   // Add some items
 
   var defaultActions = {
-    'home': true,
-    'start': true,
-    'stop': true,
-    'reset': true,
+    'home':  {icon: 'icons/cogwheel.png'},
+    'start': {icon: 'icons/small31.png'},
+    'stop':  {icon: 'icons/no1.png'},
+    'reset': {icon: 'icons/update.png'},
   };
 
-  _.forEach(defaultActions, function (v, action) {
+  _.forEach(defaultActions, function (settings, action) {
     console.log('adding action', action);
-    menu.append(new gui.MenuItem({
-      label: action
-    }));
+    var options = {
+      label: action,
+    };
+    if (settings.icon) {
+      options.icon = settings.icon;
+    }
+    menu.append(new gui.MenuItem(options));
   });
 
   return {
