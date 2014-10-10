@@ -25,12 +25,12 @@
     <script src="scripts/app.js"></script>
     <script src="scripts/ros.js"></script>
     <script src="scripts/hardware.js"></script>
+    <script src="scripts/menu.js"></script>
 
 </head>
 
 <body ng-controller="MainCtrl">
-
-  <button id="status-all"       ng-class="hardware.all.class" class="btn btn-lg">
+  <button id="status-all"       ng-class="hardware.all.class" class="btn btn-lg" ng-click="showMenu($event)">
     <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
     <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-hand-left"></span>
   </button>

@@ -2,7 +2,7 @@
 
 var app = angular.module('app', ['ui.bootstrap', 'angularSpinner']);
 
-app.controller('MainCtrl', function ($scope, ros, Hardware) {
+app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
   $scope.title = '<%= appName %>';
 
   $scope.status = 'btn-primary';
@@ -67,5 +67,12 @@ app.controller('MainCtrl', function ($scope, ros, Hardware) {
     rosTimeout();
 
     $scope.hardware = parts;
-  })
+  });
+
+  // menu
+
+  $scope.showMenu = function (e) {
+    menu.popup(e.x, e.y);
+  };
+
 });
