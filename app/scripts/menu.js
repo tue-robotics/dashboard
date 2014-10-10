@@ -20,22 +20,17 @@ app.factory('menu', function ($rootScope) {
   };
 
   _.forEach(defaultActions, function (settings, action) {
-    console.log('adding action', action);
     var options = {
       label: action,
     };
-    if (settings.icon) {
-      options.icon = settings.icon;
-    }
+    _.extend(options, settings);
     menu.append(new gui.MenuItem(options));
   });
 
   return {
     popup: function (x, y) {
       // Popup as context menu
-      menu.popup(10, 10);
-
-
+      menu.popup(100, 100);
     }
   };
 });
