@@ -15,7 +15,7 @@
     "url": "git://github.com/Rayman/dashboard.git"
   },
   "scripts": {
-    "version": "grunt version"
+    "version": "./release.sh"
   },
   "devDependencies": {
     "grunt": "~0.4.5",

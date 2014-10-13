@@ -57,30 +57,25 @@ module.exports = function (grunt) {
         files:       ['package.json', 'app/package.json'],
         commitFiles: ['package.json', 'app/package.json'],
         updateConfigs: ['pkg'],
-        commit: false,
-        createTag: false,
-        push: false,
+        commit: true,
+        createTag: true,
+        push: true,
+        pushTo: 'origin',
       }
     },
     // update the version in the package.xml
     xmlpoke: {
-      versions: {
+      version: {
         options: {
         xpath: '//version',
         value: '<%=pkg.version%>'
         },
         files: {
           'package.xml': 'package.xml'
-        },
-      },
+        }
+      }
     }
   });
-
-  grunt.registerTask('version', [
-    'bump:versions',
-    'xmlpoke',
-    //'bump:publish',
-  ]);
 
   grunt.registerTask('build', [
     'clean:dist',
