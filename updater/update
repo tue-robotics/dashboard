@@ -9,13 +9,14 @@ URL=`echo $LATEST | awk '{ print $2 }'`
 echo -e "found these versions:\n\n$RELEASES\n"
 echo "latest: $TAG"
 
-if [ -e $DIR/$TAG ]
+if [ -e $DIR/tags/$TAG ]
 then
   echo "no updates found"
 else
   rm -rf $DIR/../dist/*
   wget $URL -O- | tar -xzv --directory $DIR/../dist
-  touch $DIR/$TAG
+  mkdir $DIR/tags
+  touch $DIR/tags/$TAG
 fi
 
 
