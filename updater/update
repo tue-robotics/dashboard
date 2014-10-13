@@ -1,6 +1,7 @@
 #!/bin/bash
 
-RELEASES=`./get_releases linux64`
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+RELEASES=`$DIR/get_releases linux64`
 LATEST=`echo $RELEASES | head -n 1`
 TAG=`echo $LATEST | awk '{ print $1 }'`
 URL=`echo $LATEST | awk '{ print $2 }'`
@@ -8,13 +9,13 @@ URL=`echo $LATEST | awk '{ print $2 }'`
 echo -e "found these versions:\n\n$RELEASES\n"
 echo "latest: $TAG"
 
-if [ -e $TAG ]
+if [ -e $DIR/$TAG ]
 then
   echo "no updates found"
 else
-  rm -rf ../dist/*
-  wget $URL -O- | tar -xzv --directory ../dist
-  touch $TAG
+  rm -rf $DIR/../dist/*
+  wget $URL -O- | tar -xzv --directory $DIR/../dist
+  touch $DIR/$TAG
 fi
 
 
