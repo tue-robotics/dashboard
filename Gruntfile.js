@@ -49,8 +49,38 @@ module.exports = function (grunt) {
           {expand: true, cwd: './<%= config.dist %>/dashboard/linux64/', src: '**', dest: '.'},
         ]
       }
+    },
+
+    // for releasing a new version
+    bump: {
+      options: {
+        files:       ['package.json', 'app/package.json'],
+        commitFiles: ['package.json', 'app/package.json'],
+        updateConfigs: ['pkg'],
+        commit: false,
+        createTag: false,
+        push: false,
+      }
+    },
+    // update the version in the package.xml
+    xmlpoke: {
+      versions: {
+        options: {
+        xpath: '//version',
+        value: '<%=pkg.version%>'
+        },
+        files: {
+          'package.xml': 'package.xml'
+        },
+      },
     }
   });
+
+  grunt.registerTask('version', [
+    'bump:versions',
+    'xmlpoke',
+    //'bump:publish',
+  ]);
 
   grunt.registerTask('build', [
     'clean:dist',
