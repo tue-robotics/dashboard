@@ -1,7 +1,6 @@
-<?xml version="1.0"?>
-<package>
+<?xml version="1.0"?><package>
   <name>dashboard</name>
-  <version>0.0.3</version>
+  <version>0.1.0</version>
   <description>HTML5 based hardware dashboard for (TU/e) robots</description>
 
   <maintainer email="rayman747@hotmail.com">Ramon Wijnands</maintainer>
