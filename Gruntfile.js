@@ -30,7 +30,10 @@ module.exports = function (grunt) {
       options: {
         jshintrc: '.jshintrc'
       },
-      files: '<%= config.app %>/js/*.js'
+      files: [
+        '<%= config.app %>/*.js',
+        '<%= config.app %>/scripts/*.js',
+      ]
     },
     nodewebkit: {
       options: {
