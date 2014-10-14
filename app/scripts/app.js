@@ -51,13 +51,14 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
 
   Hardware.subscribe(function (parts) {
 
-    parts = _.map(parts, function (part) {
-      var level = _.at(levelMap, part.level);
+    // determine the class by color
+    parts = _.mapValues(parts, function (props) {
+
+      var level = _.at(levelMap, props.level);
       var color = levelColorMap[level];
-      part.class = 'btn-' + color;
-      return part;
+      props.class = 'btn-' + color;
+      return props;
     });
-    parts = _.indexBy(parts, 'name');
 
     $scope.rosStatus = 'ok';
     rosTimeout();
@@ -85,6 +86,7 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
   };
 
   $scope.showMenu = function (e, part) {
+    //var actions = Hardware.getActions(part);
     menu.popup(e.x, e.y, actions, function (command) {
       sendCommand(part, command);
     });

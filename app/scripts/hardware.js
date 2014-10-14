@@ -11,13 +11,15 @@ app.factory('Hardware', function (ros, $rootScope) {
   });
 
   function diagnosticMsgToStatus(message) {
-    return message.status.map(function (part) {
+    var parts = message.status.map(function (part) {
       return {
         name: part.name,
         level: part.level,
         homed: part.message === 'homed',
       };
     });
+
+    return _.indexBy(parts, 'name');
   }
 
   var outTopic = new ROSLIB.Topic({
@@ -50,7 +52,7 @@ app.factory('Hardware', function (ros, $rootScope) {
     head:       [ false    , false             , false     ],
   };
 
-  properties = _.mapValues(properties, function (v, k) {
+  properties = _.mapValues(properties, function (v) {
     return {
       homeable:           v[0],
       homeable_mandatory: v[1],
