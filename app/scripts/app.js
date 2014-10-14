@@ -10,9 +10,9 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
   // forward all ros events to the current scope
   ros.forward(['connection', 'error', 'close'], $scope);
 
-  $scope.$on('ros:connection', function (ev, data) {
+  $scope.$on('ros:connection', function () {
     $scope.rosStatus = 'connecting';
-  })
+  });
 
   $scope.$on('ros:error', function () {
     $scope.rosStatus = 'error';
@@ -47,11 +47,11 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
     $scope.$apply(function () {
       $scope.rosStatus = 'connecting';
     });
-  }, 2000)
+  }, 2000);
 
   Hardware.subscribe(function (parts) {
 
-    var parts = _.map(parts, function (part) {
+    parts = _.map(parts, function (part) {
       var level = _.at(levelMap, part.level);
       var color = levelColorMap[level];
       part.class = 'btn-' + color;
@@ -71,7 +71,7 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
 
   $scope.showMenu = function (e, part) {
     menu.popup(e.x, e.y, function (command) {
-      Hardware.publish(part, command)
+      Hardware.publish(part, command);
     });
   };
 });

@@ -16,7 +16,7 @@ app.factory('Hardware', function (ros, $rootScope) {
         name: part.name,
         level: part.level,
         homed: part.message === 'homed',
-      }
+      };
     });
   }
 

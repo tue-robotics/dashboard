@@ -2,7 +2,7 @@
 
 var app = angular.module('app');
 
-app.factory('menu', function ($rootScope) {
+app.factory('menu', function () {
 
   // Load native UI library
   var gui = require('nw.gui');
@@ -18,10 +18,6 @@ app.factory('menu', function ($rootScope) {
     'reset': {icon: 'icons/update.png'},
   };
 
-  var defaultScope = $rootScope;
-  // when forwarding events, prefix the event name
-  var prefix = 'menu:';
-
   var callbacks = [];
 
   var onClick = function (action) {
@@ -29,7 +25,7 @@ app.factory('menu', function ($rootScope) {
       cb(action);
     });
     callbacks = [];
-  }
+  };
 
   _.forEach(defaultActions, function (settings, action) {
     var options = {
