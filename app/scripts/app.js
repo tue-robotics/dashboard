@@ -67,7 +67,15 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
     throttleLog(parts);
   });
 
-  // menu
+
+
+  var sendCommand = function(part, command) {
+    Hardware.publish(part, command);
+  };
+
+  $scope.sendCommand = sendCommand;
+
+  // native context menu
 
   var actions = {
     'home':  {icon: 'icons/cogwheel.png'},
@@ -78,7 +86,10 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
 
   $scope.showMenu = function (e, part) {
     menu.popup(e.x, e.y, actions, function (command) {
-      Hardware.publish(part, command);
+
     });
   };
+
+  // bootstrap dropdown
+  $scope.actions = actions;
 });

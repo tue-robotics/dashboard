@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+    <title>Dashboard</title>
+
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="styles/main.css" />
+
+    <!-- spawn the window -->
+
+
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="bower_components/spin.js/spin.js"></script>
+    <script src="bower_components/angular-spinner/angular-spinner.min.js"></script>
+    <script src="bower_components/eventemitter2/lib/eventemitter2.js"></script>
+    <script src="bower_components/roslibjs/build/roslib.min.js"></script>
+    <script src="bower_components/lodash/dist/lodash.min.js"></script>
+
+    <script src="main.js"></script>
+
+    <script src="scripts/app.js"></script>
+    <script src="scripts/ros.js"></script>
+    <script src="scripts/hardware.js"></script>
+    <script src="scripts/menu.js"></script>
+
+</head>
+
+<body ng-controller="MainCtrl">
+  <div class="button-wrapper">
+
+    <div class="btn-group" dropdown>
+      <button class="btn dropdown-toggle" ng-class="hardware.all.class">
+        <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
+        <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-plane"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li ng-repeat="(action, options) in actions">
+          <a href="#" ng-click="sendCommand(0, action)">{{action}}</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="btn-group" dropdown>
+      <button class="btn dropdown-toggle" ng-class="hardware.base.class">
+        <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
+        <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-move"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li ng-repeat="(action, options) in actions">
+          <a href="#" ng-click="sendCommand(1, action)">{{action}}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="btn-group" dropdown>
+      <button class="btn dropdown-toggle" ng-class="hardware.spindle.class">
+        <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
+        <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-sort"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li ng-repeat="(action, options) in actions">
+          <a href="#" ng-click="sendCommand(2, action)">{{action}}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="btn-group" dropdown>
+      <button class="btn dropdown-toggle" ng-class="hardware.left_arm.class">
+        <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
+        <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-hand-left"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li ng-repeat="(action, options) in actions">
+          <a href="#" ng-click="sendCommand(3, action)">{{action}}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="btn-group" dropdown>
+      <button class="btn dropdown-toggle" ng-class="hardware.right_arm.class">
+        <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
+        <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-hand-right"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li ng-repeat="(action, options) in actions">
+          <a href="#" ng-click="sendCommand(4, action)">{{action}}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="btn-group" dropdown>
+      <button class="btn dropdown-toggle" ng-class="hardware.head.class">
+        <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
+        <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-user"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li ng-repeat="(action, options) in actions">
+          <a href="#" ng-click="sendCommand(5, action)">{{action}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <progressbar value="battery" type="{{batteryType}}"><b>{{battery}}%</b></progressbar>
+
+</body>
+
+</html>
