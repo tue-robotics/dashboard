@@ -4,11 +4,10 @@ var app = angular.module('app');
 
 app.factory('menu', function () {
 
-  // Load native UI library
-  var gui = require('nw.gui');
-
   return {
     popup: function (x, y, actions, callback) {
+      // Load native UI library
+      var gui = require('nw.gui');
 
       // Create an empty menu
       var menu = new gui.Menu();
