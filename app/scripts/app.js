@@ -69,8 +69,15 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
 
   // menu
 
+  var actions = {
+    'home':  {icon: 'icons/cogwheel.png'},
+    'start': {icon: 'icons/small31.png'},
+    'stop':  {icon: 'icons/no1.png'},
+    'reset': {icon: 'icons/update.png'},
+  };
+
   $scope.showMenu = function (e, part) {
-    menu.popup(e.x, e.y, function (command) {
+    menu.popup(e.x, e.y, actions, function (command) {
       Hardware.publish(part, command);
     });
   };
