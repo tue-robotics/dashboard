@@ -33,6 +33,31 @@ app.factory('Hardware', function (ros, $rootScope) {
     reset: 24,
   };
 
+  /*
+  |   Name  | Homeable | HomeableMandatory | Resetable |
+  |---------|----------|-------------------|-----------|
+  | Base    | no       | no                | yes       |
+  | Spindle | yes      | yes               | yes       |
+  | Arm     | yes      | no                | yes       |
+  | Head    | no       | no                | no        |
+  */
+  var properties = {
+    // Name     | Homeable | HomeableMandatory | Resetable |
+    base:       [ false    , false             , true      ],
+    spindle:    [ true     , true              , true      ],
+    left_arm:   [ true     , false             , true      ],
+    right_arm:  [ true     , false             , true      ],
+    head:       [ false    , false             , false     ],
+  };
+
+  properties = _.mapValues(properties, function (v, k) {
+    return {
+      homeable:           v[0],
+      homeable_mandatory: v[1],
+      resetable:          v[2],
+    };
+  });
+
   return {
     subscribe: function (callback) {
       inTopic.subscribe(function(message) {
@@ -58,6 +83,9 @@ app.factory('Hardware', function (ros, $rootScope) {
       OPERATIONAL:  2,
       HOMING:       3,
       ERROR:        4,
+    },
+    getActions: function () {
+
     }
   };
 });
