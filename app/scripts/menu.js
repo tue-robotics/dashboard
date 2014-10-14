@@ -12,14 +12,6 @@ app.factory('menu', function () {
       // Create an empty menu
       var menu = new gui.Menu();
 
-      // Add some items
-      var actions = {
-        'home':  {icon: 'icons/cogwheel.png'},
-        'start': {icon: 'icons/small31.png'},
-        'stop':  {icon: 'icons/no1.png'},
-        'reset': {icon: 'icons/update.png'},
-      };
-
       _.forEach(actions, function (settings, action) {
         var options = {
           label: action,
