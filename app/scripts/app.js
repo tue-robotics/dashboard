@@ -86,7 +86,7 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
 
   $scope.showMenu = function (e, part) {
     menu.popup(e.x, e.y, actions, function (command) {
-
+      sendCommand(part, command);
     });
   };
 
