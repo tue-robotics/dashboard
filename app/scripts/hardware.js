@@ -10,6 +10,14 @@ app.factory('Hardware', function (ros, $rootScope) {
     throttle_rate: 2,
   });
 
+  var outTopic = new ROSLIB.Topic({
+    ros: ros.ros,
+    name: '/amigo/dashboard_ctrlcmds',
+    messageType: 'std_msgs/UInt8MultiArray',
+  });
+
+  // save the last hardware status for getting the possible actions
+  var hardware_status = {};
   function diagnosticMsgToStatus(message) {
     var parts = message.status.map(function (part) {
       return {
@@ -19,15 +27,10 @@ app.factory('Hardware', function (ros, $rootScope) {
       };
     });
 
-    return _.indexBy(parts, 'name');
+    return hardware_status = _.indexBy(parts, 'name');
   }
 
-  var outTopic = new ROSLIB.Topic({
-    ros: ros.ros,
-    name: '/amigo/dashboard_ctrlcmds',
-    messageType: 'std_msgs/UInt8MultiArray',
-  });
-
+  // define how the actions map to hardware commands
   var commands = {
     home:  21,
     start: 22,
@@ -51,7 +54,6 @@ app.factory('Hardware', function (ros, $rootScope) {
     right_arm:  [ true     , false             , true      ],
     head:       [ false    , false             , false     ],
   };
-
   properties = _.mapValues(properties, function (v) {
     return {
       homeable:           v[0],
