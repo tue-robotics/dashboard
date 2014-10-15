@@ -26,8 +26,8 @@ app.factory('Hardware', function (ros, $rootScope) {
         homed: part.message === 'homed',
       };
     });
-
-    return hardware_status = _.indexBy(parts, 'name');
+    hardware_status = _.indexBy(parts, 'name');
+    return hardware_status;
   }
 
   /*
@@ -64,12 +64,12 @@ app.factory('Hardware', function (ros, $rootScope) {
   };
 
   var hardware_ids = {
-    "all":        0,
-    "base":       1,
-    "spindle":    2,
-    "left_arm":   3,
-    "right_arm":  4,
-    "head":       5,
+    'all':        0,
+    'base':       1,
+    'spindle':    2,
+    'left_arm':   3,
+    'right_arm':  4,
+    'head':       5,
   };
 
   var levels = {
@@ -102,7 +102,7 @@ app.factory('Hardware', function (ros, $rootScope) {
     },
     levels: levels,
     getActions: function (part) {
-      var props = properties[part]
+      var props = properties[part];
       if (!props) {
         return;
       }
@@ -118,7 +118,7 @@ app.factory('Hardware', function (ros, $rootScope) {
         actions.home = {
           enabled: level === levels.IDLE,
           warning: !homed && !props.homeable_mandatory ?
-            "This part was already homed, Are you sure you want to redo homing?" : false,
+            'This part was already homed, Are you sure you want to redo homing?' : false,
         };
       }
 
@@ -126,7 +126,7 @@ app.factory('Hardware', function (ros, $rootScope) {
       actions.start = {
         enabled: level === levels.IDLE && (homed || !props.homeable_mandatory),
         warning: !homed && !props.homeable_mandatory ?
-          "This part is not yet homed, Are you sure you want to proceed?" : false,
+          'This part is not yet homed, Are you sure you want to proceed?' : false,
       };
 
       // always show stop action

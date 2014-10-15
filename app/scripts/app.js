@@ -91,7 +91,7 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
     actions = Hardware.getActions(part);
 
     // merge the action icons in only when they are defined
-    var actions = _.mapValues(actions, function (props, action) {
+    actions = _.mapValues(actions, function (props, action) {
         return _.merge(_.clone(props), actionIcons[action]);
     });
 
