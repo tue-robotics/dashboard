@@ -68,17 +68,16 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
     //throttleLog(parts);
   });
 
-
+  var actions = {};
 
   var sendCommand = function(part, command) {
-    Hardware.publish(part, command);
+    var warning = actions[command].warning;
+    if (warning && confirm(warning)) {
+      Hardware.publish(part, command);
+    }
   };
-
   $scope.sendCommand = sendCommand;
 
-  // native context menu
-
-  var actions = {};
   var actionIcons = {
     'home':  {icon: 'icons/cogwheel.png', glyphicon: 'cog'},
     'start': {icon: 'icons/small31.png',  glyphicon: 'play'},
@@ -86,6 +85,7 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
     'reset': {icon: 'icons/update.png',   glyphicon: 'refresh'},
   };
 
+  // native context menu for selecting actions
   $scope.showMenu = function (e, part) {
     //var actions = Hardware.getActions(part);
     actions = Hardware.getActions(part);
@@ -96,15 +96,11 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
     });
 
     menu.popup(e.x, e.y, actions, function (command) {
-      if (actions[command].warning) {
-        if (confirm(actions[command].warning)) {
-          sendCommand(part, command);
-        }
-      }
+      sendCommand(part, command);
     });
   };
 
-  // bootstrap dropdown
+  // bootstrap dropdown for selecting actions
   $scope.toggled = function (open, part) {
     if (open) {
       actions = Hardware.getActions(part);
