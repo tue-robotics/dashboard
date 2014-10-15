@@ -65,7 +65,7 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
 
     $scope.hardware = parts;
 
-    throttleLog(parts);
+    //throttleLog(parts);
   });
 
 
@@ -78,7 +78,8 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
 
   // native context menu
 
-  var actions = {
+  var actions = {};
+  var actionIcons = {
     'home':  {icon: 'icons/cogwheel.png'},
     'start': {icon: 'icons/small31.png'},
     'stop':  {icon: 'icons/no1.png'},
@@ -87,6 +88,13 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
 
   $scope.showMenu = function (e, part) {
     //var actions = Hardware.getActions(part);
+    actions = Hardware.getActions(part);
+
+    // merge the action icons in only when they are defined
+    var actions = _.mapValues(actions, function (props, action) {
+        return _.merge(_.clone(props), actionIcons[action]);
+    });
+
     menu.popup(e.x, e.y, actions, function (command) {
       sendCommand(part, command);
     });

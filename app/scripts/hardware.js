@@ -72,6 +72,14 @@ app.factory('Hardware', function (ros, $rootScope) {
     "head":       5,
   };
 
+  var levels = {
+    STALE:        0,
+    IDLE:         1,
+    OPERATIONAL:  2,
+    HOMING:       3,
+    ERROR:        4,
+  };
+
   return {
     subscribe: function (callback) {
       inTopic.subscribe(function(message) {
@@ -92,20 +100,42 @@ app.factory('Hardware', function (ros, $rootScope) {
 
       outTopic.publish(cmd);
     },
-    levels: {
-      STALE:        0,
-      IDLE:         1,
-      OPERATIONAL:  2,
-      HOMING:       3,
-      ERROR:        4,
-    },
+    levels: levels,
     getActions: function (part) {
-      var properties = properties[part]
-      if (!properties) {
-        return {};
+      var props = properties[part]
+      if (!props) {
+        return;
       }
 
-      console.log(properties);
+      var status = hardware_status[part];
+
+      var actions = {};
+
+      // only show the home action if homeable
+      if (props.homeable) {
+        actions.home = {
+          enabled: status.level === levels.IDLE,
+        };
+      }
+
+      // always show start action
+      actions.start = {
+        enabled: status.level === levels.IDLE && (props.homed || !props.homeable_mandatory)
+      };
+
+      // always show stop action
+      actions.stop = {
+        enabled: status.level === levels.HOMING || status.level === levels.OPERATIONAL,
+      };
+
+      // only show reset action if resetable
+      if (props.resetable) {
+        actions.reset = {
+          enabled: status.level === levels.ERROR && props.resetable,
+        };
+      }
+
+      return actions;
     }
   };
 });
