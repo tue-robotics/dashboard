@@ -96,7 +96,11 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
     });
 
     menu.popup(e.x, e.y, actions, function (command) {
-      sendCommand(part, command);
+      if (actions[command].warning) {
+        if (confirm(actions[command].warning)) {
+          sendCommand(part, command);
+        }
+      }
     });
   };
 

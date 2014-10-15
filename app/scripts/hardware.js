@@ -109,6 +109,7 @@ app.factory('Hardware', function (ros, $rootScope) {
 
       var status = hardware_status[part];
       var level = status ? status.level : -1;
+      var homed = status ? status.homed : false;
 
       var actions = {};
 
@@ -116,12 +117,16 @@ app.factory('Hardware', function (ros, $rootScope) {
       if (props.homeable) {
         actions.home = {
           enabled: level === levels.IDLE,
+          warning: !homed && !props.homeable_mandatory ?
+            "This part was already homed, Are you sure you want to redo homing?" : false,
         };
       }
 
       // always show start action
       actions.start = {
-        enabled: level === levels.IDLE && (props.homed || !props.homeable_mandatory)
+        enabled: level === levels.IDLE && (homed || !props.homeable_mandatory),
+        warning: !homed && !props.homeable_mandatory ?
+          "This part is not yet homed, Are you sure you want to proceed?" : false,
       };
 
       // always show stop action
