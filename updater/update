@@ -13,7 +13,8 @@ if [ -e $DIR/tags/$TAG ]
 then
   echo "no updates found"
 else
-  rm -rf $DIR/../dist/*
+  rm -rf $DIR/../dist
+  mkdir $DIR/../dist -p
   wget $URL -O- | tar -xzv --directory $DIR/../dist
   mkdir $DIR/tags -p
   touch $DIR/tags/$TAG
