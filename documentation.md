@@ -48,6 +48,12 @@ For each part, the following actions will be shown. Keep in mind some actions ca
 | operation |                      | start, reset, home | stop            |
 | error     |                      | start, stop, home  | reset           |
 
+## Disabled actions (short version)
+home  = idle && homeable
+start = idle && (homed || !mandatory)
+stop  = homing || operation
+reset = error && resetable
+
 ## Which Warnings should be shown when?
 
 | State | Triggered action |         Condition          | Warning |
