@@ -39,7 +39,7 @@
       </button>
       <ul class="dropdown-menu" role="menu">
         <li ng-repeat="(action, options) in actions" ng-class="options.enabled || 'disabled'">
-          <a href="#" ng-click="sendCommand('all', action)">
+          <a href="#" ng-click="options.enabled && sendCommand('all', action)">
             <span class="glyphicon glyphicon-{{options.glyphicon}}"></span> {{action}}
           </a>
         </li>
@@ -53,7 +53,7 @@
       </button>
       <ul class="dropdown-menu" role="menu">
         <li ng-repeat="(action, options) in actions" ng-class="options.enabled || 'disabled'">
-          <a href="#" ng-click="sendCommand('base', action)">
+          <a href="#" ng-click="options.enabled && sendCommand('base', action)">
             <span class="glyphicon glyphicon-{{options.glyphicon}}"></span> {{action}}
           </a>
         </li>
@@ -66,7 +66,7 @@
       </button>
       <ul class="dropdown-menu" role="menu">
         <li ng-repeat="(action, options) in actions" ng-class="options.enabled || 'disabled'">
-          <a href="#" ng-click="sendCommand('spindle', action)">
+          <a href="#" ng-click="options.enabled && sendCommand('spindle', action)">
             <span class="glyphicon glyphicon-{{options.glyphicon}}"></span> {{action}}
           </a>
         </li>
@@ -79,7 +79,7 @@
       </button>
       <ul class="dropdown-menu" role="menu">
         <li ng-repeat="(action, options) in actions" ng-class="options.enabled || 'disabled'">
-          <a href="#" ng-click="sendCommand('left_arm', action)">
+          <a href="#" ng-click="options.enabled && sendCommand('left_arm', action)">
             <span class="glyphicon glyphicon-{{options.glyphicon}}"></span> {{action}}
           </a>
         </li>
@@ -92,7 +92,7 @@
       </button>
       <ul class="dropdown-menu" role="menu">
         <li ng-repeat="(action, options) in actions" ng-class="options.enabled || 'disabled'">
-          <a href="#" ng-click="sendCommand('right_arm', action)">
+          <a href="#" ng-click="options.enabled && sendCommand('right_arm', action)">
             <span class="glyphicon glyphicon-{{options.glyphicon}}"></span> {{action}}
           </a>
         </li>
@@ -105,8 +105,8 @@
       </button>
       <ul class="dropdown-menu" role="menu">
         <li ng-repeat="(action, options) in actions" ng-class="options.enabled || 'disabled'">
-          <a href="#" ng-click="sendCommand('head', action)">
-            <span class="glyphicon glyphicon-{{options.glyphicon}}"></span> {{action}} {{options.enabled}}
+          <a href="#" ng-click="options.enabled && sendCommand('head', action)">
+            <span class="glyphicon glyphicon-{{options.glyphicon}}"></span> {{action}}
           </a>
         </li>
       </ul>
