@@ -80,10 +80,10 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
 
   var actions = {};
   var actionIcons = {
-    'home':  {icon: 'icons/cogwheel.png'},
-    'start': {icon: 'icons/small31.png'},
-    'stop':  {icon: 'icons/no1.png'},
-    'reset': {icon: 'icons/update.png'},
+    'home':  {icon: 'icons/cogwheel.png', glyphicon: 'cog'},
+    'start': {icon: 'icons/small31.png',  glyphicon: 'play'},
+    'stop':  {icon: 'icons/no1.png',      glyphicon: 'stop'},
+    'reset': {icon: 'icons/update.png',   glyphicon: 'refresh'},
   };
 
   $scope.showMenu = function (e, part) {
@@ -105,5 +105,15 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
   };
 
   // bootstrap dropdown
-  $scope.actions = actions;
+  $scope.toggled = function (open, part) {
+    if (open) {
+      actions = Hardware.getActions(part);
+
+      // merge the action icons in only when they are defined
+      actions = _.mapValues(actions, function (props, action) {
+          return _.merge(_.clone(props), actionIcons[action]);
+      });
+      $scope.actions = actions;
+    }
+  }
 });
