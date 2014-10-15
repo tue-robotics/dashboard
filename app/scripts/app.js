@@ -72,9 +72,10 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
 
   var sendCommand = function(part, command) {
     var warning = actions[command].warning;
-    if (warning && confirm(warning)) {
-      Hardware.publish(part, command);
+    if (warning && !confirm(warning)) {
+      return;
     }
+    Hardware.publish(part, command);
   };
   $scope.sendCommand = sendCommand;
 
