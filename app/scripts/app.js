@@ -112,5 +112,5 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
       });
       $scope.actions = actions;
     }
-  }
+  };
 });
