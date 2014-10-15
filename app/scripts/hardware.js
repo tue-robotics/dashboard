@@ -30,14 +30,6 @@ app.factory('Hardware', function (ros, $rootScope) {
     return hardware_status = _.indexBy(parts, 'name');
   }
 
-  // define how the actions map to hardware commands
-  var commands = {
-    home:  21,
-    start: 22,
-    stop:  23,
-    reset: 24,
-  };
-
   /*
   |   Name  | Homeable | HomeableMandatory | Resetable |
   |---------|----------|-------------------|-----------|
@@ -48,6 +40,7 @@ app.factory('Hardware', function (ros, $rootScope) {
   */
   var properties = {
     // Name     | Homeable | HomeableMandatory | Resetable |
+    all:        [ true     , false             , true      ],
     base:       [ false    , false             , true      ],
     spindle:    [ true     , true              , true      ],
     left_arm:   [ true     , false             , true      ],
@@ -62,6 +55,23 @@ app.factory('Hardware', function (ros, $rootScope) {
     };
   });
 
+  // define how the actions map to hardware commands
+  var commands = {
+    home:  21,
+    start: 22,
+    stop:  23,
+    reset: 24,
+  };
+
+  var hardware_ids = {
+    "all":        0,
+    "base":       1,
+    "spindle":    2,
+    "left_arm":   3,
+    "right_arm":  4,
+    "head":       5,
+  };
+
   return {
     subscribe: function (callback) {
       inTopic.subscribe(function(message) {
@@ -71,9 +81,10 @@ app.factory('Hardware', function (ros, $rootScope) {
         });
       });
     },
-    publish: function (i1, command) {
+    publish: function (part, command) {
+      var i1 = hardware_ids[part];
       var i2 = commands[command];
-      console.log('sending this to the hardware:', i1, i2);
+      console.log('hardware command: %s %s (%i, %i)', command, part, i1, i2);
 
       var cmd = new ROSLIB.Message({
         data: [i1, i2],
@@ -88,8 +99,13 @@ app.factory('Hardware', function (ros, $rootScope) {
       HOMING:       3,
       ERROR:        4,
     },
-    getActions: function () {
+    getActions: function (part) {
+      var properties = properties[part]
+      if (!properties) {
+        return {};
+      }
 
+      console.log(properties);
     }
   };
 });
