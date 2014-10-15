@@ -108,30 +108,31 @@ app.factory('Hardware', function (ros, $rootScope) {
       }
 
       var status = hardware_status[part];
+      var level = status ? status.level : -1;
 
       var actions = {};
 
       // only show the home action if homeable
       if (props.homeable) {
         actions.home = {
-          enabled: status.level === levels.IDLE,
+          enabled: level === levels.IDLE,
         };
       }
 
       // always show start action
       actions.start = {
-        enabled: status.level === levels.IDLE && (props.homed || !props.homeable_mandatory)
+        enabled: level === levels.IDLE && (props.homed || !props.homeable_mandatory)
       };
 
       // always show stop action
       actions.stop = {
-        enabled: status.level === levels.HOMING || status.level === levels.OPERATIONAL,
+        enabled: level === levels.HOMING || level === levels.OPERATIONAL,
       };
 
       // only show reset action if resetable
       if (props.resetable) {
         actions.reset = {
-          enabled: status.level === levels.ERROR && props.resetable,
+          enabled: level === levels.ERROR && props.resetable,
         };
       }
 
