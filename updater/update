@@ -15,7 +15,7 @@ then
 else
   rm -rf $DIR/../dist/*
   wget $URL -O- | tar -xzv --directory $DIR/../dist
-  mkdir $DIR/tags
+  mkdir $DIR/tags -p
   touch $DIR/tags/$TAG
 fi
 
