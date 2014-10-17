@@ -31,91 +31,96 @@
 </head>
 
 <body>
-  <div ng-controller="MainCtrl" class="button-wrapper">
 
-    <div class="btn-group" dropdown on-toggle="toggled(open, 'all')">
-      <button class="btn dropdown-toggle" ng-class="hardware.all.class">
-        <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
-        <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-plane"></span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        <li ng-repeat="(action, options) in actions" ng-class="options.enabled || 'disabled'">
-          <a href="#" ng-click="options.enabled && sendCommand('all', action)">
-            <span class="glyphicon glyphicon-{{options.glyphicon}}"></span> {{action}}
-          </a>
-        </li>
-      </ul>
+  <div class="dashboard-wrapper">
+
+    <div ng-controller="MainCtrl" class="button-wrapper">
+
+      <div class="btn-group" dropdown on-toggle="toggled(open, 'all')">
+        <button class="btn dropdown-toggle" ng-class="hardware.all.class">
+          <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
+          <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-plane"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li ng-repeat="(action, options) in actions" ng-class="options.enabled || 'disabled'">
+            <a href="#" ng-click="options.enabled && sendCommand('all', action)">
+              <span class="glyphicon glyphicon-{{options.glyphicon}}"></span> {{action}}
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="btn-group" dropdown on-toggle="toggled(open, 'base')">
+        <button class="btn dropdown-toggle" ng-class="hardware.base.class">
+          <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
+          <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-move"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li ng-repeat="(action, options) in actions" ng-class="options.enabled || 'disabled'">
+            <a href="#" ng-click="options.enabled && sendCommand('base', action)">
+              <span class="glyphicon glyphicon-{{options.glyphicon}}"></span> {{action}}
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="btn-group" dropdown on-toggle="toggled(open, 'spindle')">
+        <button class="btn dropdown-toggle" ng-class="hardware.spindle.class">
+          <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
+          <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-sort"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li ng-repeat="(action, options) in actions" ng-class="options.enabled || 'disabled'">
+            <a href="#" ng-click="options.enabled && sendCommand('spindle', action)">
+              <span class="glyphicon glyphicon-{{options.glyphicon}}"></span> {{action}}
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="btn-group" dropdown on-toggle="toggled(open, 'left_arm')">
+        <button class="btn dropdown-toggle" ng-class="hardware.left_arm.class">
+          <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
+          <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-hand-left"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li ng-repeat="(action, options) in actions" ng-class="options.enabled || 'disabled'">
+            <a href="#" ng-click="options.enabled && sendCommand('left_arm', action)">
+              <span class="glyphicon glyphicon-{{options.glyphicon}}"></span> {{action}}
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="btn-group" dropdown on-toggle="toggled(open, 'right_arm')">
+        <button class="btn dropdown-toggle" ng-class="hardware.right_arm.class">
+          <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
+          <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-hand-right"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li ng-repeat="(action, options) in actions" ng-class="options.enabled || 'disabled'">
+            <a href="#" ng-click="options.enabled && sendCommand('right_arm', action)">
+              <span class="glyphicon glyphicon-{{options.glyphicon}}"></span> {{action}}
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="btn-group" dropdown on-toggle="toggled(open, 'head')">
+        <button class="btn dropdown-toggle" ng-class="hardware.head.class">
+          <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
+          <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-user"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li ng-repeat="(action, options) in actions" ng-class="options.enabled || 'disabled'">
+            <a href="#" ng-click="options.enabled && sendCommand('head', action)">
+              <span class="glyphicon glyphicon-{{options.glyphicon}}"></span> {{action}}
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
 
-    <div class="btn-group" dropdown on-toggle="toggled(open, 'base')">
-      <button class="btn dropdown-toggle" ng-class="hardware.base.class">
-        <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
-        <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-move"></span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        <li ng-repeat="(action, options) in actions" ng-class="options.enabled || 'disabled'">
-          <a href="#" ng-click="options.enabled && sendCommand('base', action)">
-            <span class="glyphicon glyphicon-{{options.glyphicon}}"></span> {{action}}
-          </a>
-        </li>
-      </ul>
+    <div ng-controller="BatteryCtrl" class="battery-wrapper">
+      <progressbar value="battery" type="{{batteryType}}"><b>{{battery}}%</b></progressbar>
     </div>
-    <div class="btn-group" dropdown on-toggle="toggled(open, 'spindle')">
-      <button class="btn dropdown-toggle" ng-class="hardware.spindle.class">
-        <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
-        <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-sort"></span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        <li ng-repeat="(action, options) in actions" ng-class="options.enabled || 'disabled'">
-          <a href="#" ng-click="options.enabled && sendCommand('spindle', action)">
-            <span class="glyphicon glyphicon-{{options.glyphicon}}"></span> {{action}}
-          </a>
-        </li>
-      </ul>
-    </div>
-    <div class="btn-group" dropdown on-toggle="toggled(open, 'left_arm')">
-      <button class="btn dropdown-toggle" ng-class="hardware.left_arm.class">
-        <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
-        <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-hand-left"></span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        <li ng-repeat="(action, options) in actions" ng-class="options.enabled || 'disabled'">
-          <a href="#" ng-click="options.enabled && sendCommand('left_arm', action)">
-            <span class="glyphicon glyphicon-{{options.glyphicon}}"></span> {{action}}
-          </a>
-        </li>
-      </ul>
-    </div>
-    <div class="btn-group" dropdown on-toggle="toggled(open, 'right_arm')">
-      <button class="btn dropdown-toggle" ng-class="hardware.right_arm.class">
-        <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
-        <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-hand-right"></span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        <li ng-repeat="(action, options) in actions" ng-class="options.enabled || 'disabled'">
-          <a href="#" ng-click="options.enabled && sendCommand('right_arm', action)">
-            <span class="glyphicon glyphicon-{{options.glyphicon}}"></span> {{action}}
-          </a>
-        </li>
-      </ul>
-    </div>
-    <div class="btn-group" dropdown on-toggle="toggled(open, 'head')">
-      <button class="btn dropdown-toggle" ng-class="hardware.head.class">
-        <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
-        <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-user"></span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        <li ng-repeat="(action, options) in actions" ng-class="options.enabled || 'disabled'">
-          <a href="#" ng-click="options.enabled && sendCommand('head', action)">
-            <span class="glyphicon glyphicon-{{options.glyphicon}}"></span> {{action}}
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
 
-  <div ng-controller="BatteryCtrl" class="battery-wrapper">
-    <progressbar value="battery" type="{{batteryType}}"><b>{{battery}}% {{batteryType}}</b></progressbar>
   </div>
 
 </body>
