@@ -26,11 +26,12 @@
     <script src="scripts/ros.js"></script>
     <script src="scripts/hardware.js"></script>
     <script src="scripts/menu.js"></script>
+    <script src="scripts/battery.js"></script>
 
 </head>
 
-<body ng-controller="MainCtrl">
-  <div class="button-wrapper">
+<body>
+  <div ng-controller="MainCtrl" class="button-wrapper">
 
     <div class="btn-group" dropdown on-toggle="toggled(open, 'all')">
       <button class="btn dropdown-toggle" ng-class="hardware.all.class">
@@ -113,7 +114,9 @@
     </div>
   </div>
 
-  <progressbar value="battery" type="{{batteryType}}"><b>{{battery}}%</b></progressbar>
+  <div ng-controller="BatteryCtrl" class="battery-wrapper">
+    <progressbar value="battery" type="{{batteryType}}"><b>{{battery}}% {{batteryType}}</b></progressbar>
+  </div>
 
 </body>
 

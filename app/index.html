@@ -26,11 +26,12 @@
     <script src="scripts/ros.js"></script>
     <script src="scripts/hardware.js"></script>
     <script src="scripts/menu.js"></script>
+    <script src="scripts/battery.js"></script>
 
 </head>
 
-<body ng-controller="MainCtrl">
-  <div class="button-wrapper">
+<body >
+  <div ng-controller="MainCtrl" class="button-wrapper">
     <button class="btn" ng-class="hardware.all.class"       ng-click="showMenu($event, 'all')">
       <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
       <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-plane"></span>
@@ -56,7 +57,10 @@
       <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-user"></span>
     </button>
   </div>
-  <progressbar value="battery" type="{{batteryType}}"><b>{{battery}}%</b></progressbar>
+
+  <div ng-controller="BatteryCtrl" class="battery-wrapper">
+    <progressbar  value="battery" type="{{batteryType}}"><b>{{battery}}%</b></progressbar>
+  </div>
 
 </body>
 
