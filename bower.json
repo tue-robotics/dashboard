@@ -8,5 +8,14 @@
     "angular-spinner": "~0.5.1",
     "angular-bootstrap": "~0.11.2",
     "bootstrap": "~3.3.0"
+  },
+  "dependenciesIgnore": {
+    "angular": ["**/!(angular.min.js)"],
+    "angular-bootstrap": ["**/!(ui-bootstrap-tpls.min.js)"],
+    "angular-spinner": ["**/!(angular-spinner.min.js)"],
+    "eventemitter2": ["**/!(lib)"],
+    "jquery": ["**"],
+    "bootstrap": ["**/!(dist)"],
+    "lodash": ["**/!(dist)"]
   }
 }
