@@ -117,7 +117,7 @@ app.factory('Hardware', function (ros, $rootScope) {
       if (props.homeable) {
         actions.home = {
           enabled: level === levels.IDLE,
-          warning: !homed && props.homeable_mandatory ?
+          warning: homed && props.homeable_mandatory ?
             'This part was already homed, Are you sure you want to redo homing?' : false,
         };
       }
