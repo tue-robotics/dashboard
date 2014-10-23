@@ -117,7 +117,9 @@
           </li>
         </ul>
       </div>
-      <tue-hardware-button name="head"></tue-hardware-button>
+      <tue-hardware-button name="spindle" status="hardware.spindle">
+        <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-user"></span>
+      </tue-hardware-button>
     </div>
 
     <div ng-controller="BatteryCtrl" class="battery-wrapper">
@@ -127,14 +129,13 @@
     </div>
 
     <script type="text/ng-template" id="/hardware-button.html">
-      <div class="btn-group" dropdown on-toggle="toggled(open, 'head')">
-        <button class="btn btn-xs dropdown-toggle" ng-class="hardware.head.class">
-          <span ng-if="rosStatus != 'ok'" us-spinner="{ position:'relative', radius:5, width:2, length: 6 }"></span>
-          <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-user"></span>
+      <div class="btn-group" dropdown on-toggle="console.log(open, status)">
+        <button class="btn btn-xs dropdown-toggle" ng-class="status.class">
+          {{status}}<ng-transclude></ng-transclude>
         </button>
         <ul class="dropdown-menu" role="menu">
           <li ng-repeat="(action, options) in actions" ng-class="options.enabled || 'disabled'">
-            <a href="#" ng-click="options.enabled && sendCommand('head', action)">
+            <a href="#" ng-click="options.enabled && sendCommand(status.name, action)">
               <span class="glyphicon glyphicon-{{options.glyphicon}}"></span> {{action}}
             </a>
           </li>

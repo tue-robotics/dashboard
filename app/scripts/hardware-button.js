@@ -13,12 +13,15 @@ angular.module('app')
   return {
     //template: 'Name: {{customer.name}} Address: {{customer.address}}',
     restrict: 'E',
+    transclude: true,
     templateUrl: '/hardware-button.html',
     scope: {
-      localName:'@name'
+      status: '='
     },
-    controller: function () {
-
+    controller: function ($scope, $attrs) {
+      console.log($scope);
+      console.log($attrs);
+      $scope.asdf = 'fdsa';
     }
   };
 });
