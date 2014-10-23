@@ -117,7 +117,7 @@
           </li>
         </ul>
       </div>
-      <tue-battery></tue-battery>
+      <tue-hardware-button name="head"></tue-hardware-button>
     </div>
 
     <div ng-controller="BatteryCtrl" class="battery-wrapper">
@@ -126,7 +126,7 @@
       </progressbar>
     </div>
 
-    <script type="text/ng-template" id="/tpl.html">
+    <script type="text/ng-template" id="/hardware-button.html">
       <div class="btn-group" dropdown on-toggle="toggled(open, 'head')">
         <button class="btn btn-xs dropdown-toggle" ng-class="hardware.head.class">
           <span ng-if="rosStatus != 'ok'" us-spinner="{ position:'relative', radius:5, width:2, length: 6 }"></span>

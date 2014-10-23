@@ -9,11 +9,14 @@ angular.module('app')
   };
 }])
 
-.directive('tueBattery', function() {
+.directive('tueHardwareButton', function() {
   return {
     //template: 'Name: {{customer.name}} Address: {{customer.address}}',
     restrict: 'E',
-    templateUrl: '/tpl.html',
+    templateUrl: '/hardware-button.html',
+    scope: {
+      localName:'@name'
+    },
     controller: function () {
 
     }
