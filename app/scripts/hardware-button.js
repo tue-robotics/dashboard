@@ -11,7 +11,6 @@ angular.module('app')
 
 .directive('tueHardwareButton', function() {
   return {
-    //template: 'Name: {{customer.name}} Address: {{customer.address}}',
     restrict: 'E',
     transclude: true,
     templateUrl: '/hardware-button.html',
@@ -19,9 +18,9 @@ angular.module('app')
       status: '='
     },
     controller: function ($scope, $attrs) {
-      console.log($scope);
-      console.log($attrs);
-      $scope.asdf = 'fdsa';
+      $scope.toggled = function(open) {
+        console.log('Dropdown is now: ', open);
+      };
     }
   };
 });

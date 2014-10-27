@@ -130,7 +130,7 @@
     </div>
 
     <script type="text/ng-template" id="/hardware-button.html">
-      <div class="btn-group" dropdown on-toggle="console.log(open, status)">
+      <div class="btn-group" dropdown on-toggle="toggled(open)">
         <button class="btn btn-xs dropdown-toggle" ng-class="status.class" ng-transclude>
         </button>
         <ul class="dropdown-menu" role="menu">
