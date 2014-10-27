@@ -2,16 +2,34 @@
 
 var app = angular.module('app');
 
-app.factory('ros', function ($rootScope, $timeout) {
+app.factory('rosbridge_url', function () {
+  var default_hostname = 'localhost';
+  var hostname;
+  // inside node-webkit
+  if (typeof process === 'object') {
+    var gui = require('nw.gui');
+    var args = gui.App.argv;
+    if (args.length > 0) {
+      hostname = args[0];
+    } else {
+      hostname = default_hostname;
+    }
+  } else {
+    hostname = window.location.hostname || default_hostname;
+  }
+
+  var rosUrl = 'ws://' + hostname + ':9090';
+  console.log('rosbridge_url:', rosUrl);
+  return rosUrl;
+});
+
+app.factory('ros', function ($rootScope, $timeout, rosbridge_url) {
   var defaultScope = $rootScope;
   // when forwarding events, prefix the event name
   var prefix = 'ros:';
 
-  var hostname = window.location.hostname || 'localhost';
-  var rosUrl = 'ws://' + hostname + ':9090';
-
   var ros = new ROSLIB.Ros({
-    url: rosUrl,
+    url: rosbridge_url,
   });
 
   var asyncAngularify = function (that, callback) {

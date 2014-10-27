@@ -17,8 +17,6 @@ if (isNodeWebkit)
 
   // bug? reset AlwaysOnTop
   win.setAlwaysOnTop(true);
-
-  var args = console.log(gui.App.argv);
 }
 
 /*
