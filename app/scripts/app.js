@@ -68,9 +68,6 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
     //throttleLog(parts);
   });
 
-  // TODO: remove this variable
-  var actions = {};
-
   var sendCommand = function(part, command) {
     Hardware.publish(part, command);
   };
@@ -85,8 +82,7 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
 
   // native context menu for selecting actions
   $scope.showMenu = function (e, part) {
-    //var actions = Hardware.getActions(part);
-    actions = Hardware.getActions(part);
+    var actions = Hardware.getActions(part);
 
     // merge the action icons in only when they are defined
     actions = _.mapValues(actions, function (props, action) {
@@ -100,19 +96,5 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
       }
       sendCommand(part, command);
     });
-  };
-
-  // TODO: remove this
-  // bootstrap dropdown for selecting actions
-  $scope.toggled = function (open, part) {
-    if (open) {
-      actions = Hardware.getActions(part);
-
-      // merge the action icons in only when they are defined
-      actions = _.mapValues(actions, function (props, action) {
-          return _.merge(_.clone(props), actionIcons[action]);
-      });
-      $scope.actions = actions;
-    }
   };
 });

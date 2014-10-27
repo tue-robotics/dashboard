@@ -81,6 +81,7 @@ app.factory('Hardware', function (ros, $rootScope) {
     right_arm:  [ true     , false             , true      ],
     head:       [ false    , false             , false     ],
   };
+  // transform the array of bools to an object
   properties = _.mapValues(properties, function (v) {
     return {
       homeable:           v[0],

@@ -2,13 +2,6 @@
 
 angular.module('app')
 
-.controller('Controller', ['$scope', function($scope) {
-  $scope.customer = {
-    name: 'Naomi',
-    address: '1600 Amphitheatre'
-  };
-}])
-
 .directive('tueHardwareButton', function() {
   return {
     restrict: 'E',
