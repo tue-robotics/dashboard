@@ -40,6 +40,7 @@ module.exports = function (grunt) {
         platforms: ['linux64'],
         buildDir: './<%= config.dist %>',
         cacheDir: './.nw-cache',
+        version: '0.10.5',
       },
       src: ['./app/**/*'] // Your node-webkit app
     },
