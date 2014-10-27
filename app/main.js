@@ -8,6 +8,16 @@ if (isNodeWebkit)
   window._ = global._.noConflict();
 
   var gui = require('nw.gui');
+
+  var win = gui.Window.get();
+  var screen_width = window.screen.width;
+
+  win.moveTo(screen_width - win.width, 0);
+  win.show();
+
+  // bug? reset AlwaysOnTop
+  win.setAlwaysOnTop(true);
+
   var args = console.log(gui.App.argv);
 }
 
