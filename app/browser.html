@@ -117,7 +117,8 @@
           </li>
         </ul>
       </div>
-      <tue-hardware-button name="spindle" status="hardware.spindle">
+      <tue-hardware-button
+          status="hardware.spindle" action="sendCommand('spindle', action)">
         <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
         <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-sort"></span>
       </tue-hardware-button>
@@ -135,7 +136,7 @@
         </button>
         <ul class="dropdown-menu" role="menu">
           <li ng-repeat="(action, options) in status.actions" ng-class="options.enabled || 'disabled'">
-            <a href="#" ng-click="options.enabled && sendCommand(status.name, action)">
+            <a href="#" ng-click="options.enabled && sendAction({action:action})">
               <span class="glyphicon glyphicon-{{options.glyphicon}}"></span> {{action}}
             </a>
           </li>

@@ -15,7 +15,8 @@ angular.module('app')
     transclude: true,
     templateUrl: '/hardware-button.html',
     scope: {
-      status: '='
+      status: '=',
+      sendAction: '&action',
     },
     controller: function ($scope, $attrs) {
       $scope.toggled = function(open) {

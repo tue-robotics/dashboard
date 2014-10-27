@@ -68,9 +68,11 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
     //throttleLog(parts);
   });
 
+  // TODO: remove this variable
   var actions = {};
 
   var sendCommand = function(part, command) {
+    console.log('sendCommand', part, command);
     var warning = actions[command].warning;
     if (warning && !confirm(warning)) {
       return;
@@ -101,6 +103,7 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
     });
   };
 
+  // TODO: remove this
   // bootstrap dropdown for selecting actions
   $scope.toggled = function (open, part) {
     if (open) {
