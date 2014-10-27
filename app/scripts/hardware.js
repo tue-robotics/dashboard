@@ -16,6 +16,31 @@ app.factory('Hardware', function (ros, $rootScope) {
     messageType: 'std_msgs/UInt8MultiArray',
   });
 
+  var levels = {
+    STALE:        0,
+    IDLE:         1,
+    OPERATIONAL:  2,
+    HOMING:       3,
+    ERROR:        4,
+  };
+
+  var hardware_ids = {
+    'all':        0,
+    'base':       1,
+    'spindle':    2,
+    'left_arm':   3,
+    'right_arm':  4,
+    'head':       5,
+  };
+
+  var default_status = _.mapValues(hardware_ids, function (value, name) {
+    return {
+      name: name,
+      level: levels.STALE,
+      homed: false,
+    };
+  });
+
   // save the last hardware status for getting the possible actions
   var hardware_status = {};
   function diagnosticMsgToStatus(message) {
@@ -27,6 +52,10 @@ app.factory('Hardware', function (ros, $rootScope) {
       };
     });
     hardware_status = _.indexBy(parts, 'name');
+
+    // fill all missing hardware parts with 'idle'
+    _.defaults(hardware_status, default_status);
+
     return hardware_status;
   }
 
@@ -61,23 +90,6 @@ app.factory('Hardware', function (ros, $rootScope) {
     start: 22,
     stop:  23,
     reset: 24,
-  };
-
-  var hardware_ids = {
-    'all':        0,
-    'base':       1,
-    'spindle':    2,
-    'left_arm':   3,
-    'right_arm':  4,
-    'head':       5,
-  };
-
-  var levels = {
-    STALE:        0,
-    IDLE:         1,
-    OPERATIONAL:  2,
-    HOMING:       3,
-    ERROR:        4,
   };
 
   return {
