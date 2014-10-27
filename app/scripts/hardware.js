@@ -56,6 +56,11 @@ app.factory('Hardware', function (ros, $rootScope) {
     // fill all missing hardware parts with 'idle'
     _.defaults(hardware_status, default_status);
 
+    _.mapValues(hardware_status, function (part, name) {
+      part.actions = getActions(name);
+      return part;
+    })
+
     return hardware_status;
   }
 
@@ -92,6 +97,49 @@ app.factory('Hardware', function (ros, $rootScope) {
     reset: 24,
   };
 
+  function getActions(part) {
+    var props = properties[part];
+    if (!props) {
+      return;
+    }
+
+    var status = hardware_status[part];
+    var level = status ? status.level : -1;
+    var homed = status ? status.homed : false;
+
+    var actions = {};
+
+    // only show the home action if homeable
+    if (props.homeable) {
+      actions.home = {
+        enabled: level === levels.IDLE,
+        warning: homed && props.homeable_mandatory ?
+          'This part was already homed, Are you sure you want to redo homing?' : false,
+      };
+    }
+
+    // always show start action
+    actions.start = {
+      enabled: level === levels.IDLE && (homed || !props.homeable_mandatory),
+      warning: props.homeable && !homed ?
+        'This part is not yet homed, Are you sure you want to proceed?' : false,
+    };
+
+    // always show stop action
+    actions.stop = {
+      enabled: level === levels.HOMING || level === levels.OPERATIONAL,
+    };
+
+    // only show reset action if resetable
+    if (props.resetable) {
+      actions.reset = {
+        enabled: level === levels.ERROR && props.resetable,
+      };
+    }
+
+    return actions;
+  }
+
   return {
     subscribe: function (callback) {
       inTopic.subscribe(function(message) {
@@ -113,48 +161,6 @@ app.factory('Hardware', function (ros, $rootScope) {
       outTopic.publish(cmd);
     },
     levels: levels,
-    getActions: function (part) {
-      var props = properties[part];
-      if (!props) {
-        return;
-      }
-
-      var status = hardware_status[part];
-      var level = status ? status.level : -1;
-      var homed = status ? status.homed : false;
-
-      var actions = {};
-
-      // only show the home action if homeable
-      if (props.homeable) {
-        actions.home = {
-          enabled: level === levels.IDLE,
-          warning: homed && props.homeable_mandatory ?
-            'This part was already homed, Are you sure you want to redo homing?' : false,
-        };
-      }
-
-      // always show start action
-      console.log(homed, props.homeable, props.homeable_mandatory);
-      actions.start = {
-        enabled: level === levels.IDLE && (homed || !props.homeable_mandatory),
-        warning: props.homeable && !homed ?
-          'This part is not yet homed, Are you sure you want to proceed?' : false,
-      };
-
-      // always show stop action
-      actions.stop = {
-        enabled: level === levels.HOMING || level === levels.OPERATIONAL,
-      };
-
-      // only show reset action if resetable
-      if (props.resetable) {
-        actions.reset = {
-          enabled: level === levels.ERROR && props.resetable,
-        };
-      }
-
-      return actions;
-    }
+    getActions: getActions,
   };
 });
