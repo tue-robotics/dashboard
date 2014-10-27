@@ -18,10 +18,23 @@ angular.module('app')
       status: '=',
       sendAction: '&action',
     },
-    controller: function ($scope, $attrs) {
-      $scope.toggled = function(open) {
-        console.log('Dropdown is now: ', open);
-      };
+    controller: function ($scope) {
+      $scope.handleClick = function (action) {
+        // check if this action was enabled
+        var options = $scope.status.actions[action];
+        if (!options.enabled) {
+          return;
+        }
+
+        // confirm any warnings
+        var warning = options.warning;
+        if (warning && !confirm(warning)) {
+          return;
+        }
+
+        // send it to the parent scope
+        $scope.sendAction({action:action})
+      }
     }
   };
 });

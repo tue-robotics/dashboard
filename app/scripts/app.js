@@ -72,11 +72,6 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
   var actions = {};
 
   var sendCommand = function(part, command) {
-    console.log('sendCommand', part, command);
-    var warning = actions[command].warning;
-    if (warning && !confirm(warning)) {
-      return;
-    }
     Hardware.publish(part, command);
   };
   $scope.sendCommand = sendCommand;
@@ -99,6 +94,10 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
     });
 
     menu.popup(e.x, e.y, actions, function (command) {
+      var warning = actions[command].warning;
+      if (warning && !confirm(warning)) {
+        return;
+      }
       sendCommand(part, command);
     });
   };

@@ -136,7 +136,7 @@
         </button>
         <ul class="dropdown-menu" role="menu">
           <li ng-repeat="(action, options) in status.actions" ng-class="options.enabled || 'disabled'">
-            <a href="#" ng-click="options.enabled && sendAction({action:action})">
+            <a href="#" ng-click="handleClick(action)">
               <span class="glyphicon glyphicon-{{options.glyphicon}}"></span> {{action}}
             </a>
           </li>
