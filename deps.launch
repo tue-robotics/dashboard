@@ -1,5 +1,7 @@
+<?xml version="1.0"?>
 <launch>
   <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch" />
-  <include file="$(find node_alive)/launch/server.launch" />
-</launch>
 
+  <node pkg="rostopic" type="rostopic" name="battery_pub"  args="pub /amigo/battery_percentage std_msgs/Float32 50 -r 10" />
+
+</launch>
