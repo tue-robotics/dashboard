@@ -8,7 +8,7 @@ if (isNodeWebkit)
   window._ = global._.noConflict();
 
   var gui = require('nw.gui');
-  gui.Window.get().show();
+  var args = console.log(gui.App.argv);
 }
 
 /*
