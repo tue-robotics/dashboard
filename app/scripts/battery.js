@@ -13,7 +13,6 @@ app.controller('BatteryCtrl', function ($scope, ros) {
   listener.subscribe(function(message) {
     var percent = message.data; // float32
     set_battery(percent);
-    console.log('Received message on ' + listener.name + ': ' + message.data);
   });
 
   function set_battery(percent) {
