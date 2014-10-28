@@ -1,7 +1,4 @@
-.dashboard-wrapper {
-  height: 32px;
-}
-
+/* hardware buttons */
 .button-wrapper {
   padding: 4px 0px 0px 4px;
   float: left;
@@ -13,6 +10,7 @@
   width: 32px;
 }
 
+/* battery */
 .battery-wrapper {
   padding: 4px 0px 0px 4px;
   width: 72px;
@@ -24,8 +22,28 @@
 .battery-wrapper .progress{
   height: 32px;
   margin: 0px;
+  border: 1px solid #ccc;
 }
 
+/* center the % vertically */
+.battery-wrapper b {
+  line-height: 30px;
+}
+
+.battery-wrapper .progress:after {
+  content: "";
+  display: block;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+
+  margin: 6px 66px;
+  width: 6px;
+  height: 16px;
+  position: absolute;
+  border-radius: 2px;
+}
+
+/* run stops */
 .btn-circle {
   width: 30px;
   height: 30px;
