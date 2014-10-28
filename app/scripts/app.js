@@ -68,7 +68,7 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
 
     $scope.hardware = parts;
 
-    throttleLog(parts);
+    //throttleLog(parts);
   });
 
   var sendCommand = function(part, command) {
