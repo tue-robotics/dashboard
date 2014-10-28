@@ -104,5 +104,9 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
   $scope.showDevTools = function () {
     console.log('showDevtools');
     require('nw.gui').Window.get().showDevTools();
+  };
+
+  $scope.reload = function () {
+    location.reload();
   }
 });
