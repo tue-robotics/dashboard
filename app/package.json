@@ -4,7 +4,7 @@
   "version": "0.3.0",
   "window": {
     "width": 400,
-    "height": 40, // (2*4) + 32,
+    "height": 40,
     "toolbar": false,
     "always-on-top": true,
     "show": false
