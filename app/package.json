@@ -3,8 +3,9 @@
   "main": "index.html",
   "version": "0.3.0",
   "window": {
-    "width": 500,
-    "height": 80,
+    "width": 400,
+    "height": 40, // (2*4) + 32,
+    "toolbar": false,
     "always-on-top": true,
     "show": false
   }

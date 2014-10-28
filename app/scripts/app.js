@@ -11,14 +11,17 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
   ros.forward(['connection', 'error', 'close'], $scope);
 
   $scope.$on('ros:connection', function () {
+    console.log('ros:connection');
     $scope.rosStatus = 'connecting';
   });
 
   $scope.$on('ros:error', function () {
+    console.log('ros:error');
     $scope.rosStatus = 'error';
   });
 
   $scope.$on('ros:close', function () {
+    console.log('ros:close');
     $scope.rosStatus = 'closed';
   });
 
@@ -65,7 +68,7 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
 
     $scope.hardware = parts;
 
-    //throttleLog(parts);
+    throttleLog(parts);
   });
 
   var sendCommand = function(part, command) {
@@ -97,4 +100,9 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
       sendCommand(part, command);
     });
   };
+
+  $scope.showDevTools = function () {
+    console.log('showDevtools');
+    require('nw.gui').Window.get().showDevTools();
+  }
 });

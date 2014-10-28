@@ -31,9 +31,9 @@
 
 </head>
 
-<body >
+<body ng-controller="MainCtrl">
 
-  <div ng-controller="MainCtrl" class="button-wrapper">
+  <div class="button-wrapper">
 
     <tue-hardware-button ng-click="showMenu($event, 'all')"
         status="hardware.all">
@@ -75,6 +75,12 @@
 
   <div ng-controller="BatteryCtrl" class="battery-wrapper">
     <progressbar  value="battery" type="{{batteryType}}"><b>{{battery}}%</b></progressbar>
+  </div>
+
+  <div class="button-wrapper">
+    <button type="button" class="btn btn-xs btn-link" ng-click="showDevTools()">
+      <span class="glyphicon glyphicon-cog"></span>
+    </button>
   </div>
 
   <script type="text/ng-template" id="/hardware-button.html">
