@@ -39,37 +39,37 @@
 
       <tue-hardware-button
           status="hardware.all" action="sendCommand('all', action)">
-        <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
+        <span ng-if="rosStatus != 'ok'" us-spinner="{ position:'relative', radius:5, width:2, length: 6 }"></span>
         <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-plane"></span>
       </tue-hardware-button>
 
       <tue-hardware-button
           status="hardware.base" action="sendCommand('base', action)">
-        <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
+        <span ng-if="rosStatus != 'ok'" us-spinner="{ position:'relative', radius:5, width:2, length: 6 }"></span>
         <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-move"></span>
       </tue-hardware-button>
 
       <tue-hardware-button
           status="hardware.spindle" action="sendCommand('spindle', action)">
-        <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
+        <span ng-if="rosStatus != 'ok'" us-spinner="{ position:'relative', radius:5, width:2, length: 6 }"></span>
         <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-sort"></span>
       </tue-hardware-button>
 
       <tue-hardware-button
           status="hardware.left_arm" action="sendCommand('left_arm', action)">
-        <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
+        <span ng-if="rosStatus != 'ok'" us-spinner="{ position:'relative', radius:5, width:2, length: 6 }"></span>
         <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-hand-left"></span>
       </tue-hardware-button>
 
       <tue-hardware-button
           status="hardware.right_arm" action="sendCommand('right_arm', action)">
-        <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
+        <span ng-if="rosStatus != 'ok'" us-spinner="{ position:'relative', radius:5, width:2, length: 6 }"></span>
         <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-hand-right"></span>
       </tue-hardware-button>
 
       <tue-hardware-button
           status="hardware.head" action="sendCommand('head', action)">
-        <span ng-if="rosStatus != 'ok'" us-spinner="{ position: 'relative' }"></span>
+        <span ng-if="rosStatus != 'ok'" us-spinner="{ position:'relative', radius:5, width:2, length: 6 }"></span>
         <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-user"></span>
       </tue-hardware-button>
 
