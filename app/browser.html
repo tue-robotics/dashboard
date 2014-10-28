@@ -31,71 +31,67 @@
 
 </head>
 
-<body>
+<body ng-controller="MainCtrl">
 
-  <div class="dashboard-wrapper">
+  <div class="button-wrapper">
 
-    <div ng-controller="MainCtrl" class="button-wrapper">
+    <tue-hardware-button
+        status="hardware.all" action="sendCommand('all', action)">
+      <span ng-if="rosStatus != 'ok'" us-spinner="{ position:'relative', radius:5, width:2, length: 6 }"></span>
+      <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-plane"></span>
+    </tue-hardware-button>
 
-      <tue-hardware-button
-          status="hardware.all" action="sendCommand('all', action)">
-        <span ng-if="rosStatus != 'ok'" us-spinner="{ position:'relative', radius:5, width:2, length: 6 }"></span>
-        <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-plane"></span>
-      </tue-hardware-button>
+    <tue-hardware-button
+        status="hardware.base" action="sendCommand('base', action)">
+      <span ng-if="rosStatus != 'ok'" us-spinner="{ position:'relative', radius:5, width:2, length: 6 }"></span>
+      <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-move"></span>
+    </tue-hardware-button>
 
-      <tue-hardware-button
-          status="hardware.base" action="sendCommand('base', action)">
-        <span ng-if="rosStatus != 'ok'" us-spinner="{ position:'relative', radius:5, width:2, length: 6 }"></span>
-        <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-move"></span>
-      </tue-hardware-button>
+    <tue-hardware-button
+        status="hardware.spindle" action="sendCommand('spindle', action)">
+      <span ng-if="rosStatus != 'ok'" us-spinner="{ position:'relative', radius:5, width:2, length: 6 }"></span>
+      <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-sort"></span>
+    </tue-hardware-button>
 
-      <tue-hardware-button
-          status="hardware.spindle" action="sendCommand('spindle', action)">
-        <span ng-if="rosStatus != 'ok'" us-spinner="{ position:'relative', radius:5, width:2, length: 6 }"></span>
-        <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-sort"></span>
-      </tue-hardware-button>
+    <tue-hardware-button
+        status="hardware.left_arm" action="sendCommand('left_arm', action)">
+      <span ng-if="rosStatus != 'ok'" us-spinner="{ position:'relative', radius:5, width:2, length: 6 }"></span>
+      <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-hand-left"></span>
+    </tue-hardware-button>
 
-      <tue-hardware-button
-          status="hardware.left_arm" action="sendCommand('left_arm', action)">
-        <span ng-if="rosStatus != 'ok'" us-spinner="{ position:'relative', radius:5, width:2, length: 6 }"></span>
-        <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-hand-left"></span>
-      </tue-hardware-button>
+    <tue-hardware-button
+        status="hardware.right_arm" action="sendCommand('right_arm', action)">
+      <span ng-if="rosStatus != 'ok'" us-spinner="{ position:'relative', radius:5, width:2, length: 6 }"></span>
+      <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-hand-right"></span>
+    </tue-hardware-button>
 
-      <tue-hardware-button
-          status="hardware.right_arm" action="sendCommand('right_arm', action)">
-        <span ng-if="rosStatus != 'ok'" us-spinner="{ position:'relative', radius:5, width:2, length: 6 }"></span>
-        <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-hand-right"></span>
-      </tue-hardware-button>
-
-      <tue-hardware-button
-          status="hardware.head" action="sendCommand('head', action)">
-        <span ng-if="rosStatus != 'ok'" us-spinner="{ position:'relative', radius:5, width:2, length: 6 }"></span>
-        <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-user"></span>
-      </tue-hardware-button>
-
-    </div>
-
-    <div ng-controller="BatteryCtrl" class="battery-wrapper">
-      <progressbar value="battery" type="{{batteryType}}">
-        <b>{{battery}}%</b>
-      </progressbar>
-    </div>
-
-    <script type="text/ng-template" id="/hardware-button.html">
-      <div class="btn-group" dropdown>
-        <button class="btn btn-xs dropdown-toggle" ng-class="status.class" ng-transclude>
-        </button>
-        <ul class="dropdown-menu" role="menu">
-          <li ng-repeat="(action, options) in status.actions" ng-class="options.enabled || 'disabled'">
-            <a href="#" ng-click="handleClick(action)">
-              <span class="glyphicon glyphicon-{{options.glyphicon}}"></span> {{action}}
-            </a>
-          </li>
-        </ul>
-      </div>
-    </script>
+    <tue-hardware-button
+        status="hardware.head" action="sendCommand('head', action)">
+      <span ng-if="rosStatus != 'ok'" us-spinner="{ position:'relative', radius:5, width:2, length: 6 }"></span>
+      <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-user"></span>
+    </tue-hardware-button>
 
   </div>
+
+  <div ng-controller="BatteryCtrl" class="battery-wrapper">
+    <progressbar value="battery" type="{{batteryType}}">
+      <b>{{battery}}%</b>
+    </progressbar>
+  </div>
+
+  <script type="text/ng-template" id="/hardware-button.html">
+    <div class="btn-group" dropdown>
+      <button class="btn btn-xs dropdown-toggle" ng-class="status.class" ng-transclude>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li ng-repeat="(action, options) in status.actions" ng-class="options.enabled || 'disabled'">
+          <a href="#" ng-click="handleClick(action)">
+            <span class="glyphicon glyphicon-{{options.glyphicon}}"></span> {{action}}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </script>
 
 </body>
 
