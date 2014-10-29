@@ -1,3 +1,4 @@
+*.log
 .nw-cache/
 dist/
 node_modules/
