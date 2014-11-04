@@ -3,9 +3,20 @@ node_js:
 - '0.10'
 
 before_install:
-  - npm install -g bower grunt-cli
+- npm install -g bower grunt-cli
 
 install:
-  - npm install
+- npm install
 
 script: grunt build
+
+deploy:
+  provider: releases
+  api_key:
+    secure: bKxX9A/3/hvddncJa0uW56xTj9YHZ7fYSyDzpV+imOroS4wEoycjhITr/Z4BGlIDArGaQwheALet/g+E2nsynP1P9+rWU0Nga5frhkM00LByhjP7RT0uvC6oL9DSFT98/uKwHBkUEnsPyH3GOm3CWr0uuLNshKoU7Y1lVI24dEU=
+  file_glob: true
+  file: dist/dashboard-*-linux64.tar.gz
+  on:
+    repo: tue-robotics/dashboard
+    tags: true
+    all_branches: true
