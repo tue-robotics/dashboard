@@ -13,7 +13,7 @@ angular.module('app')
     },
     controller: function ($scope, $attrs, ros) {
       var topic;
-      if ($attrs.type == 'wireless') {
+      if ($attrs.type === 'wireless') {
         topic = '/amigo/emergency_switch';
       } else {
         topic = '/amigo/runstop';
@@ -44,7 +44,7 @@ angular.module('app')
 
       $scope.$watch('enabled', function(enabled) {
         console.log(enabled);
-        if (typeof enabled == 'undefined') {
+        if (typeof enabled === 'undefined') {
           $scope.class = 'btn-default';
         } else if (enabled) {
           $scope.class = 'btn-danger';

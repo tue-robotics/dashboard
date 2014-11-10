@@ -59,7 +59,7 @@ app.factory('Hardware', function (ros, $rootScope) {
     _.mapValues(hardware_status, function (part, name) {
       part.actions = getActions(name);
       return part;
-    })
+    });
 
     return hardware_status;
   }

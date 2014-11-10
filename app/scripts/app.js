@@ -42,9 +42,9 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
 
   var levelMap = _.invert(Hardware.levels);
 
-  var throttleLog = _.throttle(function () {
-      console.log.apply(console, arguments);
-    }, 5000);
+  // var throttleLog = _.throttle(function () {
+  //   console.log.apply(console, arguments);
+  // }, 5000);
 
   var rosTimeout = _.debounce(function () {
     $scope.$apply(function () {
@@ -94,7 +94,7 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
 
     menu.popup(e.x, e.y, actions, function (command) {
       var warning = actions[command].warning;
-      if (warning && !confirm(warning)) {
+      if (warning && !window.confirm(warning)) {
         return;
       }
       sendCommand(part, command);
@@ -108,5 +108,5 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
 
   $scope.reload = function () {
     location.reload();
-  }
+  };
 });

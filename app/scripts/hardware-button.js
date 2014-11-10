@@ -21,13 +21,13 @@ angular.module('app')
 
         // confirm any warnings
         var warning = options.warning;
-        if (warning && !confirm(warning)) {
+        if (warning && !window.confirm(warning)) {
           return;
         }
 
         // send it to the parent scope
-        $scope.sendAction({action:action})
-      }
+        $scope.sendAction({action:action});
+      };
     }
   };
 });

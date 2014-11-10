@@ -18,7 +18,7 @@ app.controller('BatteryCtrl', function ($scope, ros) {
   function set_battery(percent) {
     $scope.$apply(function () {
       $scope.battery = percent;
-    })
+    });
   }
 
   $scope.$watch('battery', function(){
