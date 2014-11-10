@@ -3,7 +3,7 @@
   "main": "index.html",
   "version": "0.4.0",
   "window": {
-    "width": 400,
+    "width": 435,
     "height": 40,
     "toolbar": false,
     "always-on-top": true,
