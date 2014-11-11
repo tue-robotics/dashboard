@@ -24,6 +24,7 @@
 
     <script src="scripts/app.js"></script>
     <script src="scripts/ros.js"></script>
+    <script src="scripts/status-controller.js"></script>
     <script src="scripts/hardware.js"></script>
     <script src="scripts/hardware-button.js"></script>
     <script src="scripts/runstop.js"></script>
@@ -34,7 +35,7 @@
 
 <body ng-controller="MainCtrl">
 
-  <div class="button-wrapper">
+  <div class="button-wrapper" ng-controller="StatusCtrl">
 
     <tue-hardware-button
         status="hardware.all" action="sendCommand('all', action)">

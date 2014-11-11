@@ -2,28 +2,7 @@
 
 var app = angular.module('app', ['ui.bootstrap', 'angularSpinner']);
 
-app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
-  $scope.title = '<%= appName %>';
-
-  $scope.status = 'btn-primary';
-
-  // forward all ros events to the current scope
-  ros.forward(['connection', 'error', 'close'], $scope);
-
-  $scope.$on('ros:connection', function () {
-    console.log('ros:connection');
-    $scope.rosStatus = 'connecting';
-  });
-
-  $scope.$on('ros:error', function () {
-    console.log('ros:error');
-    $scope.rosStatus = 'error';
-  });
-
-  $scope.$on('ros:close', function () {
-    console.log('ros:close');
-    $scope.rosStatus = 'closed';
-  });
+app.controller('MainCtrl', function ($scope, Hardware, menu) {
 
   // battery
 
@@ -46,12 +25,6 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
   //   console.log.apply(console, arguments);
   // }, 5000);
 
-  var rosTimeout = _.debounce(function () {
-    $scope.$apply(function () {
-      $scope.rosStatus = 'connecting';
-    });
-  }, 2000);
-
   Hardware.subscribe(function (parts) {
 
     // determine the class by color
@@ -62,9 +35,6 @@ app.controller('MainCtrl', function ($scope, ros, Hardware, menu) {
       props.class = 'btn-' + color;
       return props;
     });
-
-    $scope.rosStatus = 'ok';
-    rosTimeout();
 
     $scope.hardware = parts;
 
