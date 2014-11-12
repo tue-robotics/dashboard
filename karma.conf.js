@@ -11,6 +11,11 @@ module.exports = function(config) {
     files: [
       'app/bower_components/angular/angular.min.js',
       'app/bower_components/angular-mocks/angular-mocks.js',
+
+      'app/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
+      'app/bower_components/spin.js/spin.js',
+      'app/bower_components/angular-spinner/angular-spinner.min.js',
+
       'app/scripts/*.js',
     ],
 
