@@ -33,7 +33,6 @@ angular.module('app')
       }
 
       var unsetEnabled = _.debounce(function () {
-        console.log(unsetEnabled);
         setEnabled(undefined);
       }, 2000);
 
@@ -43,7 +42,6 @@ angular.module('app')
       });
 
       $scope.$watch('enabled', function(enabled) {
-        console.log(enabled);
         if (typeof enabled === 'undefined') {
           $scope.class = 'btn-default';
         } else if (enabled) {
