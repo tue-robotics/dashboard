@@ -1,11 +1,11 @@
 var parseBuildPlatforms = function (argumentPlatform) {
   // this will make it build no platform when the platform option is specified
   // without a value which makes argumentPlatform into a boolean
-  var inputPlatforms = argumentPlatform || process.platform + ";" + process.arch;
+  var inputPlatforms = argumentPlatform || process.platform + ';' + process.arch;
 
   // Do some scrubbing to make it easier to match in the regexes bellow
-  inputPlatforms = inputPlatforms.replace("darwin", "mac");
-  inputPlatforms = inputPlatforms.replace(/;ia|;x|;arm/, "");
+  inputPlatforms = inputPlatforms.replace('darwin', 'mac');
+  inputPlatforms = inputPlatforms.replace(/;ia|;x|;arm/, '');
 
   var buildAll = /^all$/.test(inputPlatforms);
 
