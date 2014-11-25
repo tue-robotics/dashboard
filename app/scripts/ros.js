@@ -3,17 +3,23 @@
 var app = angular.module('app');
 
 app.provider('ros', function () {
-  // this.rosbridge_url should be configured
-  this.$get = function ($rootScope, $timeout) {
 
+  this.ros = new ROSLIB.Ros();
+
+  // this can be called during the config phase
+  this.setRosbridgeUrl = function (url) {
+    this.rosbridge_url = url;
+  };
+
+  this.$get = function ($rootScope, $timeout) {
     var defaultScope = $rootScope;
+
     // when forwarding events, prefix the event name
     var prefix = 'ros:';
 
     console.log('connecting to ' + this.rosbridge_url);
-    var ros = new ROSLIB.Ros({
-      url: this.rosbridge_url,
-    });
+    var ros = this.ros;
+    ros.connect(this.rosbridge_url);
 
     var asyncAngularify = function (that, callback) {
       return callback ? function () {
@@ -65,5 +71,5 @@ app.config(function (rosProvider) {
   }
 
   var rosUrl = 'ws://' + hostname + ':9090';
-  rosProvider.rosbridge_url = rosUrl;
+  rosProvider.setRosbridgeUrl(rosUrl);
 });
