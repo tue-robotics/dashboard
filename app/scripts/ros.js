@@ -11,6 +11,8 @@ app.provider('ros', function () {
     this.rosbridge_url = url;
   };
 
+  var RECONNECT_TIMEOUT = 5000; // ms
+
   this.$get = function ($rootScope, $timeout) {
     var defaultScope = $rootScope;
 
@@ -19,7 +21,16 @@ app.provider('ros', function () {
 
     console.log('connecting to ' + this.rosbridge_url);
     var ros = this.ros;
-    ros.connect(this.rosbridge_url);
+
+    var connect = (function () {
+      ros.connect(this.rosbridge_url);
+    }).bind(this);
+
+    ros.on('close', function () {
+      setTimeout(connect, RECONNECT_TIMEOUT);
+    });
+
+    connect();
 
     var asyncAngularify = function (that, callback) {
       return callback ? function () {
