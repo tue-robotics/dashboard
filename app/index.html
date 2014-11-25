@@ -83,7 +83,12 @@
   </div>
 
   <div ng-controller="BatteryCtrl" class="battery-wrapper">
-    <progressbar  value="battery" type="{{batteryType}}"><b>{{battery}}%</b></progressbar>
+    <progressbar value="battery" type="{{batteryType}}"
+        ngCloak
+        ng-class="{'progress-striped': batteryUnknown, active: batteryUnknown}">
+      <b ng-if="batteryUnknown">Unknown</b>
+      <b ng-if="!batteryUnknown">{{battery}}%</b>
+    </progressbar>
   </div>
 
   <div class="button-wrapper">
