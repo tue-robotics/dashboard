@@ -2,12 +2,12 @@
 
 var app = angular.module('app');
 
-app.controller('BatteryCtrl', function ($scope, ros, $timeout) {
+app.controller('BatteryCtrl', function ($scope, ros) {
 
   var BATTERY_TIMEOUT = 2000; // ms
 
-  $scope.battery = 0;
-  $scope.batteryUnknown = false;
+  $scope.battery = 100;
+  $scope.batteryUnknown = true;
 
   var listener = new ROSLIB.Topic({
     ros : ros.ros,
