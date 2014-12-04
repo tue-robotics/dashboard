@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html ng-app="app">
+<html ng-app="app" ng-controller="StatusCtrl">
 
 <head>
-    <title>Dashboard</title>
+    <title ng-bind="title"></title>
 
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 
@@ -35,7 +35,7 @@
 
 <body ng-controller="MainCtrl">
 
-  <div class="button-wrapper" ng-controller="StatusCtrl">
+  <div class="button-wrapper">
 
     <tue-hardware-button ng-click="showMenu($event, 'all')"
         status="hardware.all">

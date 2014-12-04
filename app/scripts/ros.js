@@ -43,6 +43,7 @@ app.provider('ros', function () {
 
     return {
       ros: ros,
+      rosbridge_url: this.rosbridge_url,
       forward: function (events, scope) {
         if (!Array.isArray(events)) {
           events = [events];

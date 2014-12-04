@@ -4,6 +4,8 @@ var app = angular.module('app');
 
 app.controller('StatusCtrl', function ($scope, ros, Hardware) {
 
+  $scope.title = ros.rosbridge_url;
+
   // if no message arrived for 2000 ms,
   // set the ros status back to 'connecting'
   var checkConnection = _.debounce(function () {
