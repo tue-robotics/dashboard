@@ -39,38 +39,38 @@
 
     <tue-hardware-button ng-click="showMenu($event, 'all')"
         status="hardware.all">
-      <span ng-if="rosStatus != 'ok'" us-spinner="{ position:'relative', radius:5, width:2, length: 6 }"></span>
-      <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-plane"></span>
+      <span ng-if="rosStatus == 'closed'" us-spinner="{ position:'relative', radius:5, width:2, length: 6 }"></span>
+      <span ng-if="rosStatus != 'closed'" class="glyphicon glyphicon-plane"></span>
     </tue-hardware-button>
 
     <tue-hardware-button ng-click="showMenu($event, 'base')"
         status="hardware.base">
-      <span ng-if="rosStatus != 'ok'" us-spinner="{ position:'relative', radius:5, width:2, length: 6 }"></span>
-      <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-move"></span>
+      <span ng-if="rosStatus == 'closed'" us-spinner="{ position:'relative', radius:5, width:2, length: 6 }"></span>
+      <span ng-if="rosStatus != 'closed'" class="glyphicon glyphicon-move"></span>
     </tue-hardware-button>
 
     <tue-hardware-button ng-click="showMenu($event, 'spindle')"
         status="hardware.spindle">
-      <span ng-if="rosStatus != 'ok'" us-spinner="{ position:'relative', radius:5, width:2, length: 6 }"></span>
-      <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-sort"></span>
+      <span ng-if="rosStatus == 'closed'" us-spinner="{ position:'relative', radius:5, width:2, length: 6 }"></span>
+      <span ng-if="rosStatus != 'closed'" class="glyphicon glyphicon-sort"></span>
     </tue-hardware-button>
 
     <tue-hardware-button ng-click="showMenu($event, 'left_arm')"
         status="hardware.left_arm">
-      <span ng-if="rosStatus != 'ok'" us-spinner="{ position:'relative', radius:5, width:2, length: 6 }"></span>
-      <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-hand-left"></span>
+      <span ng-if="rosStatus == 'closed'" us-spinner="{ position:'relative', radius:5, width:2, length: 6 }"></span>
+      <span ng-if="rosStatus != 'closed'" class="glyphicon glyphicon-hand-left"></span>
     </tue-hardware-button>
 
     <tue-hardware-button ng-click="showMenu($event, 'right_arm')"
         status="hardware.right_arm">
-      <span ng-if="rosStatus != 'ok'" us-spinner="{ position:'relative', radius:5, width:2, length: 6 }"></span>
-      <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-hand-right"></span>
+      <span ng-if="rosStatus == 'closed'" us-spinner="{ position:'relative', radius:5, width:2, length: 6 }"></span>
+      <span ng-if="rosStatus != 'closed'" class="glyphicon glyphicon-hand-right"></span>
     </tue-hardware-button>
 
     <tue-hardware-button ng-click="showMenu($event, 'head')"
         status="hardware.head">
-      <span ng-if="rosStatus != 'ok'" us-spinner="{ position:'relative', radius:5, width:2, length: 6 }"></span>
-      <span ng-if="rosStatus == 'ok'" class="glyphicon glyphicon-user"></span>
+      <span ng-if="rosStatus == 'closed'" us-spinner="{ position:'relative', radius:5, width:2, length: 6 }"></span>
+      <span ng-if="rosStatus != 'closed'" class="glyphicon glyphicon-user"></span>
     </tue-hardware-button>
 
     <tue-runstop>
