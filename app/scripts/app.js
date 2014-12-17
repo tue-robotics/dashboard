@@ -25,11 +25,23 @@ app.controller('MainCtrl', function ($scope, Hardware, menu) {
   //   console.log.apply(console, arguments);
   // }, 5000);
 
-  Hardware.subscribe(function (parts) {
+  var hardwareTimout = _.debounce(function (parts) {
+    parts = _.mapValues(parts, function (props) {
+      props.level = Hardware.levels.STALE;
+      return props;
+    });
+    $scope.$apply(_.partial(setHardwareStatus, parts));
+  }, 1000);
 
+  Hardware.subscribe(function (parts) {
+    setHardwareStatus(parts);
+    hardwareTimout(parts);
+    //throttleLog(parts);
+  });
+
+  function setHardwareStatus (parts) {
     // determine the class by color
     parts = _.mapValues(parts, function (props) {
-
       var level = _.at(levelMap, props.level);
       var color = levelColorMap[level];
       props.class = 'btn-' + color;
@@ -37,9 +49,7 @@ app.controller('MainCtrl', function ($scope, Hardware, menu) {
     });
 
     $scope.hardware = parts;
-
-    //throttleLog(parts);
-  });
+  }
 
   var sendCommand = function(part, command) {
     Hardware.publish(part, command);
