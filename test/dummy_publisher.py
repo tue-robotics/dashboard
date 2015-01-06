@@ -6,12 +6,19 @@ This can be used to test the dashboard
 """
 import rospy
 from diagnostic_msgs.msg import DiagnosticArray, DiagnosticStatus
+from std_msgs.msg import Float32
+
+class BatteryPublisher():
+    topic = '/amigo/battery_percentage'
+    def __init__(self):
+        self.pub = rospy.Publisher(self.topic, Float32, queue_size=10)
+    def send(self):
+        self.pub.publish(30.0)
 
 class DiagnosticArrayPublisher():
     def __init__(self):
         self.pub = rospy.Publisher(self.topic, DiagnosticArray, queue_size=10)
     def send(self):
-
         self.pub.publish(self.generate_msg())
 
 class EbuttonPublisher(DiagnosticArrayPublisher):
@@ -67,12 +74,14 @@ if __name__ == '__main__':
     try:
         epub = EbuttonPublisher()
         hpub = HardwarePublisher()
+        bpub = BatteryPublisher()
 
         rospy.loginfo('publishing...')
         rate = rospy.Rate(10)
         while not rospy.is_shutdown():
             epub.send()
             hpub.send()
+            bpub.send()
             rate.sleep()
     except rospy.ROSInterruptException:
         pass
