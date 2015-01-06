@@ -7,10 +7,16 @@ This can be used to test the dashboard
 import rospy
 from diagnostic_msgs.msg import DiagnosticArray, DiagnosticStatus
 
-class EbuttonPublisher():
+class DiagnosticArrayPublisher():
     def __init__(self):
-        self.pub = rospy.Publisher('amigo/ebutton_status', DiagnosticArray, queue_size=10)
+        self.pub = rospy.Publisher(self.topic, DiagnosticArray, queue_size=10)
     def send(self):
+
+        self.pub.publish()
+
+class EbuttonPublisher(DiagnosticArrayPublisher):
+    topic = 'amigo/ebutton_status'
+    def generate_msg(self):
         status = [
             DiagnosticStatus(
                 level=0,
@@ -21,8 +27,7 @@ class EbuttonPublisher():
                 name="Wireless"
             )
         ]
-
-        self.pub.publish(DiagnosticArray(status=status))
+        return DiagnosticArray(status=status)
 
 if __name__ == '__main__':
     rospy.init_node('dummy_publisher', anonymous=True)
