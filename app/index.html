@@ -27,7 +27,7 @@
     <script src="scripts/status-controller.js"></script>
     <script src="scripts/hardware.js"></script>
     <script src="scripts/hardware-button.js"></script>
-    <script src="scripts/runstop.js"></script>
+    <script src="scripts/ebuttons.js"></script>
     <script src="scripts/menu.js"></script>
     <script src="scripts/battery.js"></script>
 
@@ -73,12 +73,7 @@
       <span ng-if="rosStatus != 'closed'" class="glyphicon glyphicon-user"></span>
     </tue-hardware-button>
 
-    <tue-runstop>
-      <span class="glyphicon glyphicon-ban-circle"></span>
-    </tue-runstop>
-    <tue-runstop type=wireless>
-      <span class="glyphicon glyphicon-signal"></span>
-    </tue-runstop>
+    <tue-ebuttons></tue-ebuttons>
 
   </div>
 
