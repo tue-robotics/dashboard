@@ -13,7 +13,7 @@ class BatteryPublisher():
     def __init__(self):
         self.pub = rospy.Publisher(self.topic, Float32, queue_size=10)
     def send(self):
-        self.pub.publish(30.0)
+        self.pub.publish(40.0)
 
 class DiagnosticArrayPublisher():
     def __init__(self):
@@ -45,23 +45,23 @@ class HardwarePublisher(DiagnosticArrayPublisher):
                 name="all"
             ),
             DiagnosticStatus(
-                level=1,
+                level=4,
                 name="base"
             ),
             DiagnosticStatus(
-                level=2,
+                level=1,
                 name="spindle"
             ),
             DiagnosticStatus(
-                level=3,
+                level=1,
                 name="left_arm"
             ),
             DiagnosticStatus(
-                level=4,
+                level=3,
                 name="right_arm"
             ),
             DiagnosticStatus(
-                level=1,
+                level=2,
                 name="head"
             ),
         ]
