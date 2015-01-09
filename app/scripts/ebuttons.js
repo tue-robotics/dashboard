@@ -7,11 +7,9 @@ angular.module('app')
     restrict: 'E',
     transclude: true,
     template: '\
-      <div ng-repeat="ebutton in ebuttons">\
-        <button class="btn btn-xs btn-circle" ng-class="ebutton.color">\
-          <span ng-class="ebutton.icon"></span>\
-        </button>\
-      </div>\
+      <button ng-repeat="ebutton in ebuttons" class="btn btn-xs btn-circle" ng-class="ebutton.color">\
+        <span ng-class="ebutton.icon"></span>\
+      </button>\
     ',
 
     controller: function ($scope, $attrs, ros) {
