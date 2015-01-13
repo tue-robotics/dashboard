@@ -13,14 +13,9 @@ angular.module('app')
     ',
 
     controller: function ($scope, $attrs, ros) {
+      // Constants
+      var EBUTTONS_TIMEOUT = 2000; // ms
       var topic = '/amigo/ebutton_status';
-
-      var inTopic = new ROSLIB.Topic({
-        ros: ros.ros,
-        name: topic,
-        messageType: 'diagnostic_msgs/DiagnosticArray',
-        throttle_rate: 2,
-      });
 
       var levelColorMap = {
         0: 'default',
@@ -32,21 +27,55 @@ angular.module('app')
       var nameIconMap = {
         'Wired': 'glyphicon glyphicon-ban-circle',
         'Wireless': 'glyphicon glyphicon-signal',
-        'default': 'question-sign'
+        'default': 'glyphicon glyphicon-question-sign'
       };
 
-      $scope.ebuttons = [];
+      // The state where the buttons will go on start and on timeout
+      var DEFAULT_STATE = [
+        {
+          icon: nameIconMap['default'],
+          class: levelColorMap[0],
+        }
+      ];
 
-      inTopic.subscribe(function(message) {
+      var inTopic = new ROSLIB.Topic({
+        ros: ros.ros,
+        name: topic,
+        messageType: 'diagnostic_msgs/DiagnosticArray',
+        throttle_rate: 2,
+      });
+
+      $scope.ebuttons = DEFAULT_STATE;
+
+      // only set when the state differs, less dom manipulation
+      var old_ebuttons;
+      function setEbuttons (ebuttons) {
+        if (!angular.equals(old_ebuttons, ebuttons)) {
+          old_ebuttons = ebuttons;
+          $scope.ebuttons = ebuttons;
+        }
+      }
+
+      function resetEbuttons () {
+        console.log('ebuttons message timeout');
+        $scope.$apply(function () {
+          setEbuttons(DEFAULT_STATE);
+        });
+      }
+
+      var resetEbuttonsLater = _.debounce(resetEbuttons, EBUTTONS_TIMEOUT);
+      inTopic.subscribe(function (message) {
         var ebuttons = _.map(message.status, function (status) {
           return {
             color: levelToClass(status.level),
             icon: nameToIcon(status.name)
           };
         });
-
-        $scope.ebuttons = ebuttons;
+        resetEbuttonsLater();
+        setEbuttons(ebuttons);
       });
+
+      // Functions to convert between messages and models
 
       function levelToClass(level) {
         return levelColorMap[level] ? 'btn-' + levelColorMap[level] : '';
