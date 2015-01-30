@@ -18,15 +18,17 @@ angular.module('app')
       var topic = '/amigo/ebutton_status';
 
       var levelColorMap = {
-        0: 'default',
-        1: 'info',
-        2: 'success',
-        3: 'default',
+        0: 'success', // unlocked
+        1: 'danger',  // locked
+        2: 'warning', // unknown
+        3: 'default', // unavailable
       };
 
       var nameIconMap = {
         'Wired': 'glyphicon glyphicon-ban-circle',
         'Wireless': 'glyphicon glyphicon-signal',
+        'Endswitch': 'glyphicon glyphicon-resize-vertical',
+        'Reset': 'glyphicon glyphicon-play-circle',
         'default': 'glyphicon glyphicon-question-sign'
       };
 
