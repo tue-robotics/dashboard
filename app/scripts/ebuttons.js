@@ -15,7 +15,7 @@ angular.module('app')
     controller: function ($scope, $attrs, ros) {
       // Constants
       var EBUTTONS_TIMEOUT = 2000; // ms
-      var topic = '/amigo/ebutton_status';
+      var topic = 'ebutton_status';
 
       var levelColorMap = {
         0: 'success', // unlocked

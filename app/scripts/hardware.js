@@ -5,14 +5,14 @@ var app = angular.module('app');
 app.factory('Hardware', function (ros, $rootScope) {
   var inTopic = new ROSLIB.Topic({
     ros: ros.ros,
-    name: '/amigo/hardware_status',
+    name: 'hardware_status',
     messageType: 'diagnostic_msgs/DiagnosticArray',
     throttle_rate: 2,
   });
 
   var outTopic = new ROSLIB.Topic({
     ros: ros.ros,
-    name: '/amigo/dashboard_ctrlcmds',
+    name: 'dashboard_ctrlcmds',
     messageType: 'std_msgs/UInt8MultiArray',
   });
 
