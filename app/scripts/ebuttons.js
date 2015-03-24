@@ -7,7 +7,8 @@ angular.module('app')
     restrict: 'E',
     transclude: true,
     template: '\
-      <button ng-repeat="ebutton in ebuttons" class="btn btn-xs btn-circle" ng-class="ebutton.color">\
+      <button ng-repeat="ebutton in ebuttons" class="btn btn-xs btn-circle" \
+          ng-class="ebutton.color" ng-attr-title="{{ebutton.name}}">\
         <span ng-class="ebutton.icon"></span>\
       </button>\
     ',
@@ -69,6 +70,7 @@ angular.module('app')
       inTopic.subscribe(function (message) {
         var ebuttons = _.map(message.status, function (status) {
           return {
+            name: status.name,
             color: levelToClass(status.level),
             icon: nameToIcon(status.name)
           };
