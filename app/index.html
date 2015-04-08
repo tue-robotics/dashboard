@@ -62,14 +62,14 @@
       <span ng-if="rosStatus != 'closed'" class="glyphicon glyphicon-sort"></span>
     </tue-hardware-button>
 
-    <tue-hardware-button ng-click="showMenu($event, 'left arm')"
-        status="hardware.left_arm" title="left_arm">
+    <tue-hardware-button ng-click="showMenu($event, 'left_arm')"
+        status="hardware.left_arm" title="left arm">
       <span ng-if="rosStatus == 'closed'" us-spinner="{ position:'relative', radius:5, width:2, length: 6 }"></span>
       <span ng-if="rosStatus != 'closed'" class="glyphicon glyphicon-hand-left"></span>
     </tue-hardware-button>
 
-    <tue-hardware-button ng-click="showMenu($event, 'right arm')"
-        status="hardware.right_arm" title="right_arm">
+    <tue-hardware-button ng-click="showMenu($event, 'right_arm')"
+        status="hardware.right_arm" title="right arm">
       <span ng-if="rosStatus == 'closed'" us-spinner="{ position:'relative', radius:5, width:2, length: 6 }"></span>
       <span ng-if="rosStatus != 'closed'" class="glyphicon glyphicon-hand-right"></span>
     </tue-hardware-button>
