@@ -6,6 +6,6 @@
     "angular-spinner": "~0.6.2",
     "bootstrap": "~3.3.0",
     "lodash": "~3.10.1",
-    "roslibjs": "~0.17.0"
+    "robot-api": "~0.0.3"
   }
 }
