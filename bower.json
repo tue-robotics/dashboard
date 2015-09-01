@@ -2,10 +2,10 @@
   "name": "dashboard",
   "private": true,
   "dependencies": {
-    "roslibjs": "~0.14.0",
-    "lodash": "~3.6.0",
-    "angular-spinner": "~0.5.1",
-    "angular-bootstrap": "~0.12.1",
-    "bootstrap": "~3.3.0"
+    "angular-bootstrap": "~0.13.3",
+    "angular-spinner": "~0.6.2",
+    "bootstrap": "~3.3.0",
+    "lodash": "~3.10.1",
+    "roslibjs": "~0.17.0"
   }
 }
