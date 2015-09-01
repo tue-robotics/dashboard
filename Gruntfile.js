@@ -54,7 +54,7 @@ module.exports = function (grunt) {
         '<%= config.app %>/scripts/*.js',
       ]
     },
-    nodewebkit: {
+    nwjs: {
       options: {
         platforms: ['linux64'],
         buildDir: './<%= config.dist %>',
@@ -76,7 +76,7 @@ module.exports = function (grunt) {
 
     exec: {
       linux64: {
-        cmd: '"<%= nodewebkit.options.cacheDir %>/<%= nodewebkit.options.version %>/linux64/nw" <%= config.app %>'
+        cmd: '"<%= nwjs.options.cacheDir %>/<%= nwjs.options.version %>/linux64/nw" <%= config.app %>'
       }
     },
 
@@ -108,7 +108,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'nodewebkit',
+    'nwjs',
     'compress'
   ]);
 
