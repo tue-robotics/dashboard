@@ -61,7 +61,18 @@ module.exports = function (grunt) {
         cacheDir: './.nw-cache',
         version: '0.10.5',
       },
-      src: ['./app/**/*'] // Your node-webkit app
+      src: [
+        './app/*',
+        './app/icons/**/*',
+        './app/scripts/**/*',
+        './app/styles/**/*',
+        './app/bower_components/*/*',
+        './app/bower_components/bootstrap/dist/**/*',
+        './app/bower_components/eventemitter2/lib/**/*',
+        './app/bower_components/jquery/dist/**/*',
+        './app/bower_components/robot-api/dist/**/*',
+        './app/bower_components/roslib/build/**/*'
+      ],
     },
     compress: {
       linux64: {
