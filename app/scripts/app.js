@@ -2,7 +2,7 @@
 
 var app = angular.module('app', ['ui.bootstrap', 'angularSpinner']);
 
-app.controller('MainCtrl', function ($scope, Hardware, menu) {
+app.controller('MainCtrl', function ($scope, robot, menu) {
 
   // battery
 
@@ -19,40 +19,25 @@ app.controller('MainCtrl', function ($scope, Hardware, menu) {
     ERROR:        'danger',
   };
 
-  var levelMap = _.invert(Hardware.levels);
+  var levelMap = _.invert(API.Hardware.levels);
 
-  // var throttleLog = _.throttle(function () {
-  //   console.log.apply(console, arguments);
-  // }, 5000);
+  robot.hardware.on('status', function (status) {
+    $scope.$apply(function () {
 
-  var hardwareTimout = _.debounce(function (parts) {
-    parts = _.mapValues(parts, function (props) {
-      props.level = Hardware.levels.STALE;
-      return props;
+      var parts = _.mapValues(status, function (props) {
+        var level = _.at(levelMap, props.level);
+        var color = levelColorMap[level];
+        props.class = 'btn-' + color;
+        return props;
+      });
+
+      $scope.hardware = parts;
+
     });
-    $scope.$apply(_.partial(setHardwareStatus, parts));
-  }, 1000);
-
-  Hardware.subscribe(function (parts) {
-    setHardwareStatus(parts);
-    hardwareTimout(parts);
-    //throttleLog(parts);
   });
 
-  function setHardwareStatus (parts) {
-    // determine the class by color
-    parts = _.mapValues(parts, function (props) {
-      var level = _.at(levelMap, props.level);
-      var color = levelColorMap[level];
-      props.class = 'btn-' + color;
-      return props;
-    });
-
-    $scope.hardware = parts;
-  }
-
   var sendCommand = function(part, command) {
-    Hardware.publish(part, command);
+    robot.hardware.send_command(part, command);
   };
   $scope.sendCommand = sendCommand;
 
@@ -65,7 +50,7 @@ app.controller('MainCtrl', function ($scope, Hardware, menu) {
 
   // native context menu for selecting actions
   $scope.showMenu = function (e, part) {
-    var actions = Hardware.getActions(part);
+    var actions = robot.hardware.status[part].actions;
 
     // merge the action icons in only when they are defined
     actions = _.mapValues(actions, function (props, action) {
