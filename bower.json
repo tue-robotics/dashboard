@@ -3,9 +3,9 @@
   "private": true,
   "dependencies": {
     "angular-bootstrap": "~0.13.3",
-    "angular-spinner": "~0.6.2",
+    "angular-spinner": "~0.7.0",
     "bootstrap": "~3.3.0",
     "lodash": "~3.10.1",
-    "robot-api": "~0.0.3"
+    "robot-api": "~0.1.2"
   }
 }
