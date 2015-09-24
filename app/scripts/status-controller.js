@@ -14,7 +14,9 @@ app.controller('StatusCtrl', function ($scope, robot) {
   $scope.title = robot.ros.socket.url;
 
   robot.on('status', function (status) {
-    $scope.rosStatus = status;
+    $scope.$apply(function () {
+      $scope.rosStatus = status;
+    });
   });
 
 });
