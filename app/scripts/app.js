@@ -21,20 +21,23 @@ app.controller('MainCtrl', function ($scope, robot, menu) {
 
   var levelMap = _.invert(API.Hardware.levels);
 
+  $scope.hardware = statusToScope(robot.hardware.status);
   robot.hardware.on('status', function (status) {
     $scope.$apply(function () {
-
-      var parts = _.mapValues(status, function (props) {
-        var level = _.at(levelMap, props.level);
-        var color = levelColorMap[level];
-        props.class = 'btn-' + color;
-        return props;
-      });
-
-      $scope.hardware = parts;
-
+      $scope.hardware = statusToScope(status);
     });
   });
+
+  function statusToScope(status) {
+    var parts = _.mapValues(status, function (props) {
+      var level = _.at(levelMap, props.level);
+      var color = levelColorMap[level];
+      props.class = 'btn-' + color;
+      return props;
+    });
+
+    return parts;
+  }
 
   var sendCommand = function(part, command) {
     robot.hardware.send_command(part, command);
