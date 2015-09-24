@@ -45,7 +45,9 @@ angular.module('app')
       function setEbuttons(ebuttons) {
         if (!angular.equals(oldEbuttons, ebuttons)) {
           oldEbuttons = ebuttons;
-          $scope.ebuttons = ebuttons;
+          $scope.$apply(function () {
+            $scope.ebuttons = ebuttons;
+          });
         }
       }
 
