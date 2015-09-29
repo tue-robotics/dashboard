@@ -11,7 +11,12 @@ var app = angular.module('app');
  */
 app.controller('StatusCtrl', function ($scope, robot) {
 
-  $scope.title = robot.url;
+  if (typeof process === 'object') {
+    var gui = require('nw.gui');
+    $scope.title = 'dashboard v' + gui.App.manifest.version + ' @ ' + robot.url;
+  } else {
+    $scope.title = 'dashboard @ ' + robot.url;
+  }
 
   robot.on('status', function (status) {
     $scope.$apply(function () {
