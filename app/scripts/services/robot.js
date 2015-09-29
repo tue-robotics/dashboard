@@ -20,7 +20,6 @@ angular.module('app')
 
 angular.module('app')
   .config(function (robotProvider) {
-    console.log(robotProvider);
     var default_hostname = 'localhost';
     var hostname;
     // inside node-webkit
