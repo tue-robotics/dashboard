@@ -1,6 +1,6 @@
 {
   "name": "dashboard",
-  "version": "0.6.4",
+  "version": "0.6.5",
   "description": "HTML5 based hardware dashboard for (TU/e) robots",
   "license": "BSD",
   "homepage": "https://github.com/tue-robotics/dashboard",
