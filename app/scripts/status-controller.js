@@ -11,7 +11,7 @@ var app = angular.module('app');
  */
 app.controller('StatusCtrl', function ($scope, robot) {
 
-  $scope.title = robot.ros.socket.url;
+  $scope.title = robot.url;
 
   robot.on('status', function (status) {
     $scope.$apply(function () {
