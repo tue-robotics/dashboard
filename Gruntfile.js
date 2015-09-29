@@ -56,7 +56,7 @@ module.exports = function (grunt) {
     },
     nwjs: {
       options: {
-        platforms: ['linux64'],
+        platforms: ['linux64', 'win32'],
         buildDir: './<%= config.dist %>',
         cacheDir: './.nw-cache',
         version: '0.10.5',
@@ -88,6 +88,9 @@ module.exports = function (grunt) {
     exec: {
       linux64: {
         cmd: '"<%= nwjs.options.cacheDir %>/<%= nwjs.options.version %>/linux64/nw" <%= config.app %>'
+      },
+      win: {
+        cmd: '"<%= nwjs.options.cacheDir %>/<%= nwjs.options.version %>/win32/nw.exe" <%= config.app %>'
       }
     },
 
