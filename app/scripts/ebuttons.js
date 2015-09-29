@@ -2,7 +2,7 @@
 
 angular.module('app')
 
-.directive('tueEbuttons', function() {
+.directive('tueEbuttons', function () {
   return {
     restrict: 'E',
     transclude: true,
@@ -13,11 +13,8 @@ angular.module('app')
       </button>\
     ',
 
-    controller: function ($scope, $attrs, ros) {
+    controller: function ($scope, $attrs, robot) {
       // Constants
-      var EBUTTONS_TIMEOUT = 2000; // ms
-      var topic = 'ebutton_status';
-
       var levelColorMap = {
         0: 'success', // unlocked
         1: 'danger',  // locked
@@ -41,56 +38,44 @@ angular.module('app')
         }
       ];
 
-      var inTopic = new ROSLIB.Topic({
-        ros: ros.ros,
-        name: topic,
-        messageType: 'diagnostic_msgs/DiagnosticArray',
-        throttle_rate: 2,
-      });
-
       $scope.ebuttons = DEFAULT_STATE;
 
       // only set when the state differs, less dom manipulation
-      var old_ebuttons;
-      function setEbuttons (ebuttons) {
-        if (!angular.equals(old_ebuttons, ebuttons)) {
-          old_ebuttons = ebuttons;
-          $scope.ebuttons = ebuttons;
+      var oldEbuttons;
+      function setEbuttons(ebuttons) {
+        if (!angular.equals(oldEbuttons, ebuttons)) {
+          oldEbuttons = ebuttons;
+          $scope.$apply(function () {
+            $scope.ebuttons = ebuttons;
+          });
         }
       }
 
-      function resetEbuttons () {
-        console.log('ebuttons message timeout');
-        $scope.$apply(function () {
-          setEbuttons(DEFAULT_STATE);
-        });
-      }
+      robot.hardware.on('ebuttons', function (ebuttons) {
+        setEbuttons(ebuttonsToScope(ebuttons));
+      });
 
-      var resetEbuttonsLater = _.debounce(resetEbuttons, EBUTTONS_TIMEOUT);
-      inTopic.subscribe(function (message) {
-        var ebuttons = _.map(message.status, function (status) {
+      // Functions to convert between messages and models
+
+      function ebuttonsToScope(ebuttons) {
+        if (!ebuttons) {
+          return DEFAULT_STATE;
+        }
+        return _.map(ebuttons, function (status) {
           return {
             name: status.name,
             color: levelToClass(status.level),
             icon: nameToIcon(status.name)
           };
         });
-        resetEbuttonsLater();
-        setEbuttons(ebuttons);
-      });
-
-      // Functions to convert between messages and models
+      }
 
       function levelToClass(level) {
         return levelColorMap[level] ? 'btn-' + levelColorMap[level] : '';
       }
 
       function nameToIcon(name) {
-        if (nameIconMap[name]) {
-          return nameIconMap[name];
-        } else {
-          return nameIconMap['default'];
-        }
+        return nameIconMap[name] || nameIconMap['default'];
       }
     }
   };

@@ -56,12 +56,23 @@ module.exports = function (grunt) {
     },
     nwjs: {
       options: {
-        platforms: ['linux64'],
+        platforms: ['linux64', 'win32'],
         buildDir: './<%= config.dist %>',
         cacheDir: './.nw-cache',
         version: '0.10.5',
       },
-      src: ['./app/**/*'] // Your node-webkit app
+      src: [
+        './app/*',
+        './app/icons/**/*',
+        './app/scripts/**/*',
+        './app/styles/**/*',
+        './app/bower_components/*/*',
+        './app/bower_components/bootstrap/dist/**/*',
+        './app/bower_components/eventemitter2/lib/**/*',
+        './app/bower_components/jquery/dist/**/*',
+        './app/bower_components/robot-api/dist/**/*',
+        './app/bower_components/roslib/build/**/*'
+      ],
     },
     compress: {
       linux64: {
@@ -77,6 +88,9 @@ module.exports = function (grunt) {
     exec: {
       linux64: {
         cmd: '"<%= nwjs.options.cacheDir %>/<%= nwjs.options.version %>/linux64/nw" <%= config.app %>'
+      },
+      win: {
+        cmd: '"<%= nwjs.options.cacheDir %>/<%= nwjs.options.version %>/win32/nw.exe" <%= config.app %>'
       }
     },
 

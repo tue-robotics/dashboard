@@ -2,41 +2,28 @@
 
 var app = angular.module('app');
 
-app.controller('BatteryCtrl', function ($scope, ros) {
+app.controller('BatteryCtrl', function ($scope, robot) {
 
-  var BATTERY_TIMEOUT = 2000; // ms
-
-  $scope.battery = 100;
-  $scope.batteryUnknown = true;
-
-  var listener = new ROSLIB.Topic({
-    ros : ros.ros,
-    name : 'battery_percentage',
-    messageType : 'std_msgs/Float32'
-  });
-
-  function resetBattery () {
-    console.log('battery message timeout');
-    $scope.$apply(function () {
-      $scope.batteryUnknown = true;
+  function setBattery(percent) {
+    if (angular.isNumber(percent)) {
+      $scope.battery = percent;
+      $scope.batteryUnknown = false;
+    } else {
       $scope.battery = 100;
-    });
+      $scope.batteryUnknown = true;
+    }
   }
 
-  var resetBatteryLater = _.debounce(resetBattery, BATTERY_TIMEOUT);
-  listener.subscribe(function(message) {
-    var percent = message.data; // float32
+  setBattery(robot.hardware.battery);
+  robot.hardware.on('battery', function (percent) {
     $scope.$apply(function () {
-      $scope.batteryUnknown = false;
-      $scope.battery = percent;
-      resetBatteryLater();
+      setBattery(percent);
     });
   });
 
   // change battery type based on value
-  $scope.$watch('battery', function(){
-    var type, value = $scope.battery;
-
+  $scope.$watch('battery', function(value){
+    var type;
     if ($scope.batteryUnknown) {
       type = 'info';
     } else if (value > 40) {
