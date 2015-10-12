@@ -68,9 +68,11 @@ module.exports = function (grunt) {
         './app/styles/**/*',
         './app/bower_components/*/*',
         './app/bower_components/bootstrap/dist/**/*',
+        './app/bower_components/bson/browser_build/**/*',
         './app/bower_components/eventemitter2/lib/**/*',
         './app/bower_components/jquery/dist/**/*',
         './app/bower_components/robot-api/dist/**/*',
+        '!./app/bower_components/robot-api/dist/cjs/**/*',
         './app/bower_components/roslib/build/**/*'
       ],
     },
