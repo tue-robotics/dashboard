@@ -59,7 +59,7 @@ module.exports = function (grunt) {
         platforms: ['linux64', 'win32'],
         buildDir: './<%= config.dist %>',
         cacheDir: './.nw-cache',
-        version: '0.10.5',
+        version: '0.12.3',
       },
       src: [
         './app/*',

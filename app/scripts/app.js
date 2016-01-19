@@ -57,15 +57,34 @@ app.controller('MainCtrl', function ($scope, robot, menu) {
 
     // merge the action icons in only when they are defined
     actions = _.mapValues(actions, function (props, action) {
-        return _.merge(_.clone(props), actionIcons[action]);
+      return _.merge(_.clone(props), actionIcons[action]);
     });
 
     menu.popup(e.x, e.y, actions, function (command) {
       var warning = actions[command].warning;
-      if (warning && !window.confirm(warning)) {
+
+      if (!warning) {
         return;
       }
-      sendCommand(part, command);
+
+      actions = {};
+      actions[warning] = {
+        enabled: false,
+      };
+      actions = _.merge(actions, {
+        Confirm: {
+          icon: 'icons/accepted.png'
+        },
+        Cancel: {
+          icon: 'icons/x3.png'
+        }
+      });
+
+      menu.popup(e.x, e.y, actions, function (confirmResult) {
+        if (confirmResult === 'Confirm') {
+          sendCommand(part, command);
+        }
+      });
     });
   };
 
