@@ -1,18 +1,14 @@
 language: node_js
 node_js:
 - '4'
-
 install:
 - npm install
-
 script: npm run build
-
 deploy:
   provider: releases
   api_key:
-    secure: bKxX9A/3/hvddncJa0uW56xTj9YHZ7fYSyDzpV+imOroS4wEoycjhITr/Z4BGlIDArGaQwheALet/g+E2nsynP1P9+rWU0Nga5frhkM00LByhjP7RT0uvC6oL9DSFT98/uKwHBkUEnsPyH3GOm3CWr0uuLNshKoU7Y1lVI24dEU=
-  file_glob: true
-  file: dist/dashboard-*-linux64.tar.gz
+    secure: W54Oa7xps+yMVd8wUQ/GCrgemcipZ8WTFL/lPGCZeLsqzA6hZ2CzevH/CigrZTmO0eQFIUfZKALJR7EzR9IbsSbIX4b6rgdpRZW6TX2bM0zIncX0JPyXxgnM2WIA5MiL2o7c00U83mqFyOd/BHEeSX9CP0TTL7rEa9HfWNxpo2U=
+  file: asdf
   on:
     repo: tue-robotics/dashboard
     tags: true
