@@ -8,7 +8,8 @@ deploy:
   provider: releases
   api_key:
     secure: W54Oa7xps+yMVd8wUQ/GCrgemcipZ8WTFL/lPGCZeLsqzA6hZ2CzevH/CigrZTmO0eQFIUfZKALJR7EzR9IbsSbIX4b6rgdpRZW6TX2bM0zIncX0JPyXxgnM2WIA5MiL2o7c00U83mqFyOd/BHEeSX9CP0TTL7rEa9HfWNxpo2U=
-  file: asdf
+  file_glob: true
+  file: dist/dashboard-*-linux64.tar.gz
   on:
     repo: tue-robotics/dashboard
     tags: true
