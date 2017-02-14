@@ -63,28 +63,29 @@ app.controller('MainCtrl', function ($scope, robot, menu) {
     menu.popup(e.x, e.y, actions, function (command) {
       var warning = actions[command].warning;
 
-      if (!warning) {
-        return;
+      // build a confirmation dialog
+      if (warning) {
+        actions = {};
+        actions[warning] = {
+          enabled: false,
+        };
+        actions = _.merge(actions, {
+          Confirm: {
+            icon: 'icons/accepted.png'
+          },
+          Cancel: {
+            icon: 'icons/x3.png'
+          }
+        });
+
+        menu.popup(e.x, e.y, actions, function (confirmResult) {
+          if (confirmResult === 'Confirm') {
+            sendCommand(part, command);
+          }
+        });
+      } else {
+        sendCommand(part, command);
       }
-
-      actions = {};
-      actions[warning] = {
-        enabled: false,
-      };
-      actions = _.merge(actions, {
-        Confirm: {
-          icon: 'icons/accepted.png'
-        },
-        Cancel: {
-          icon: 'icons/x3.png'
-        }
-      });
-
-      menu.popup(e.x, e.y, actions, function (confirmResult) {
-        if (confirmResult === 'Confirm') {
-          sendCommand(part, command);
-        }
-      });
     });
   };
 
