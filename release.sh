@@ -1,3 +1,3 @@
-grunt bump-only:patch
-grunt xmlpoke:version
-grunt bump-commit
+npm run grunt -- bump-only:patch
+npm run grunt -- xmlpoke:version
+npm run grunt -- bump-commit
