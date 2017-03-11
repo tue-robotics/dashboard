@@ -12,7 +12,9 @@ angular.module('app')
 
     // Method for instantiating
     this.$get = function () {
-      var robot = window.r = new API.Robot();
+      var robot = window.r = new API.Robot({
+        'hardware': true
+      });
       robot.connect(this.url);
       return robot;
     };

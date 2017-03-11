@@ -6,7 +6,7 @@
     "angular-spinner": "~0.7.0",
     "bootstrap": "~3.3.0",
     "lodash": "~3.10.1",
-    "robot-api": "0.5.3",
+    "robot-api": "0.7.0",
     "bson": "*"
   }
 }

@@ -17,7 +17,9 @@
   "scripts": {
     "build": "grunt build",
     "postinstall": "bower install",
-    "version": "./release.sh"
+    "version": "./release.sh",
+    "bower": "bower",
+    "grunt": "grunt"
   },
   "devDependencies": {
     "bower": "^1.7.2",
