@@ -1,7 +1,7 @@
 {
   "name": "dashboard",
   "main": "index.html",
-  "version": "0.6.11",
+  "version": "0.6.12",
   "window": {
     "width": 435,
     "height": 40,
