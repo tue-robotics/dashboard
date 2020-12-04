@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/Rayman/dashboard.git"
+    "url": "git://github.com/tue-robotics/dashboard.git"
   },
   "scripts": {
     "build": "grunt build",
